@@ -10,7 +10,7 @@
                         </a>
                     </div>
                     <div class="login-main">
-                        <form class="theme-form" (submit)="login(loginForm)" [formGroup]="loginForm">
+                        <form class="theme-form" (submit)="login(signupForm)" [formGroup]="signupForm">
                             <h4 class="text-center">ثبت نام</h4>
                             <p class="text-center">اطلاعات حساب کاربری خود را وارد کنید</p>
                             <div *ngIf="error.isError" class="alert alert-danger mb-4 text-white text-center"
@@ -22,20 +22,24 @@
                                 <label class="col-form-label" #userName>نام کاربری</label>
                                 <input class="username-input form-control" type="text" required
                                     formControlName="username" />
-                                <div *ngIf="loginForm.controls.username.touched && loginForm.controls.username.errors?.required"
-                                    class="text text-danger mt-1">وارد کردن نام کاربری الزامی است!</div>
-                                <div *ngIf="loginForm.controls.username.touched && loginForm.controls.username.errors?.email"
-                                    class="text text-danger mt-1">نام کاربری نامعتبر!</div>
+                                <div *ngIf="signupForm.controls.username.touched && signupForm.controls.username.errors?.required"
+                                    class="text text-danger mt-1">وارد کردن نام کاربری الزامی است!
+                                </div>
+                                <div *ngIf="signupForm.controls.username.touched && signupForm.controls.username.errors?.pattern"
+                                    class="text text-danger mt-1">
+                                    نام کاربری باید با کاراکترهای انگلیسی (a - z) نوشته شود <br>
+                                    نام کاربری باید بیشتر از 4 کاراکتر باشد
+                                </div>
                             </div>
                             <!-- USERNAME SECTION -->
                             <!-- EMAIL SECTION -->
                             <div class="form-group">
                                 <label class="col-form-label" #email>ایمیل</label>
                                 <input class="email-input form-control" type="text" required formControlName="email" />
-                                <div *ngIf="loginForm.controls.email.touched && loginForm.controls.email.errors?.required"
-                                    class="text text-danger mt-1">وارد کردن نام کاربری الزامی است!</div>
-                                <div *ngIf="loginForm.controls.email.touched && loginForm.controls.email.errors?.email"
-                                    class="text text-danger mt-1">نام کاربری نامعتبر!</div>
+                                <div *ngIf="signupForm.controls.email.touched && signupForm.controls.email.errors?.required"
+                                    class="text text-danger mt-1">وارد کردن ایمیل الزامی است!</div>
+                                <div *ngIf="signupForm.controls.email.touched && signupForm.controls.email.errors?.email"
+                                    class="text text-danger mt-1">ایمیل نامعتبر!</div>
                             </div>
                             <!-- EMAIL SECTION -->
                             <!-- PASSWORD SECTION -->
@@ -49,8 +53,15 @@
                                         <i *ngIf="showPass" class="fa fa-eye-slash"></i>
                                     </span>
                                 </div>
-                                <div *ngIf="loginForm.controls.password.touched && loginForm.controls.password.errors?.required"
-                                    class="text text-danger mt-1">وارد کردن کلمه عبور الزامی است</div>
+                                <div *ngIf="signupForm.controls.password.touched && signupForm.controls.password.errors?.required"
+                                    class="text text-danger mt-1">وارد کردن پسورد الزامی است!
+                                </div>
+                                <div *ngIf="signupForm.controls.password.touched && signupForm.controls.password.errors?.pattern"
+                                    class="text text-danger mt-1">
+                                    پسورد باید فقط شامل کاراکتر های انگلیسی و اعداد باشد <br />
+                                    پسورد باید شامل حروف بزرگ و کوچک باشد <br />
+                                    پسورد باید حداقل ۴ کاراکتر باشد <br />
+                                </div>
                             </div>
                             <!-- PASSWORD SECTION -->
                             <!-- CONFIRMPASS SECTION -->
@@ -58,28 +69,31 @@
                                 <label class="col-form-label" #confirmPass>تایید کلمه عبور</label>
                                 <div class="input-group position-relative">
                                     <input class="confirmPass-input form-control"
-                                        [type]="showPass ? 'text' : 'password'" formControlName="confirmPass"
+                                        [type]="showConfirm ? 'text' : 'password'" formControlName="confirmPassword"
                                         required />
                                     <span class="show-hide" (click)="showConfirmPassHandler()">
-                                        <i *ngIf="!showPass" class="fa fa-eye"></i>
-                                        <i *ngIf="showPass" class="fa fa-eye-slash"></i>
+                                        <i *ngIf="!showConfirm" class="fa fa-eye"></i>
+                                        <i *ngIf="showConfirm" class="fa fa-eye-slash"></i>
                                     </span>
                                 </div>
-                                <div *ngIf="loginForm.controls.confirmPass.touched && loginForm.controls.confirmPass.errors?.required"
-                                    class="text text-danger mt-1">وارد کردن کلمه عبور الزامی است</div>
+                                <div *ngIf="signupForm.controls.confirmPassword.touched && signupForm.controls.confirmPassword.errors?.required"
+                                    class="text text-danger mt-1">
+                                    وارد کردن تایید پسورد الزامی است!
+                                </div>
+                                <div *ngIf="signupForm.controls.confirmPassword.touched && signupForm.controls.confirmPassword.errors?.passwordMismatch"
+                                    class="text text-danger mt-1">
+                                    پسورد و تایید پسورد باید یکسان باشند
+                                </div>
                             </div>
                             <!-- CONFIRMPASS SECTION -->
                             <!-- REMEMBER SECTION -->
                             <div class="form-group mb-0">
-                                <div class="checkbox p-0">
-                                    <input (click)="rememberMeToggleHandler()" id="checkbox1" type="checkbox" />
-                                    <label class="text-muted" for="checkbox1">مرا به خاطر بسپار</label>
-                                </div>
-                                <!-- REMEMBER SECTION -->
                                 <div class="text-end mt-3">
-                                    <button class="btn btn-primary d-block w-100" [disabled]="!loginForm.valid"
-                                        type="submit"><span>ورود
-                                            به حساب کاربری</span></button>
+                                    <button class="btn btn-primary d-block w-100" [disabled]="!signupForm.valid"
+                                        type="submit">
+                                        <span>ثبت نام</span>
+                                    </button>
+                                    <p class="login-link" routerLink="/auth/login">ورود به حساب کاربری</p>
                                 </div>
                             </div>
                         </form>

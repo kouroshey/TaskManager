@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class SignupComponent implements OnInit {
   encryptString: string;
   newUser = false;
-  loginForm: FormGroup;
+  signupForm: FormGroup;
   showPass = false;
   showConfirm = false;
   error:
@@ -24,6 +24,7 @@ export class SignupComponent implements OnInit {
   captchaHashKey: string;
   rememberMe: boolean;
   accessToken: string;
+
   constructor(
     private fb: FormBuilder,
     public router: Router,
@@ -32,12 +33,15 @@ export class SignupComponent implements OnInit {
     private toastr: ToastrService,
     private activatedRout: ActivatedRoute,
   ) {
-    this.loginForm = this.fb.group({
-      username: ["", [Validators.required, Validators.minLength(3)]],
-      password: ["", [Validators.required]],
-      confirmPass: ["", [Validators.required]],
-      email: ["", [Validators.required]]
-    });
+    this.signupForm = this.fb.group({
+      username: ["", [Validators.required, Validators.pattern(/^[a-z0-9]+.{4,}$/)]],
+      password: ["", [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}$/),]],
+      confirmPassword: ["", [Validators.required]],
+      email: ["", [Validators.required, Validators.email]]
+    },
+      {
+        validators: this.passwordMatchValidator
+      });
   }
 
   ngOnInit() {
@@ -83,5 +87,17 @@ export class SignupComponent implements OnInit {
 
   showConfirmPassHandler() {
     this.showConfirm = !this.showConfirm
+  }
+
+  passwordMatchValidator(group: FormGroup): { [key: string]: any } | null {
+    const password = group.get('password').value;
+    const confirmPassword = group.get('confirmPassword').value;
+
+    if (password !== confirmPassword) {
+      group.get('confirmPassword').setErrors({ passwordMismatch: true });
+      return { passwordMismatch: true };
+    }
+    group.get('confirmPassword').setErrors(null);
+    return null;
   }
 }

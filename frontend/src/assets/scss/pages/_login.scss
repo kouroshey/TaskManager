@@ -18,6 +18,17 @@
     text-align: center;
   }
 
+  .login-link {
+    color: $primary-color !important;
+    font-size: small !important;
+    margin-top: 1rem;
+
+    &:hover {
+      cursor: pointer;
+      color: $black !important;
+    }
+  }
+
   .btn-showcase {
     .btn {
       line-height: 1;
@@ -154,6 +165,8 @@
   text-align: center;
   line-height: 1.2;
 }
+
+
 
 /**=====================
     25. Authentication CSS Ends
