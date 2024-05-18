@@ -1,0 +1,12 @@
+<div class="media profile-media">
+  <img class="b-r-10" [src]="userInfo.avatar" alt="" width="37" height="37">
+  <div class="media-body"><span>{{userInfo.firstName + ' ' + userInfo.lastName}}</span>
+    <p class="mb-0">{{userInfo.userName}}<i class="middle fa fa-angle-down m-2"></i></p>
+  </div>
+</div>
+<ul class="profile-dropdown onhover-show-div">
+  <li><a href="/user/profile"><app-feather-icons [icon]="'user'"></app-feather-icons><span>پروفایل</span></a></li>
+  <li><a href="/change-pass"><app-feather-icons [icon]="'file-text'"></app-feather-icons><span>تغییر کلمه
+        عبور</span></a></li>
+  <li (click)="logoutFunc()"><app-feather-icons [icon]="'log-in'"></app-feather-icons><span>خروج</span></li>
+</ul>

@@ -1,0 +1,52 @@
+<div class="col-sm-12 mt-3">
+    <div class="card ">
+        <div class="card-body">
+            <button class="btn btn-success my-2" routerLink="/users/add">افزودن کاربر جدید</button>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">تصویر </th>
+                        <th scope="col">نام</th>
+                        <th scope="col">نام کاربری</th>
+                        <th scope="col">دستورات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of usersDetails">
+                        <th scope="row">{{user.id}}</th>
+                        <th scope="row">
+                            <img *ngIf="user.avatar && user.avatar !==''" [src]="user.id" alt="پروفایل">
+                            <img *ngIf="!user.avatar && user.avatar ===''" src="assets/images/default-avatar.png"
+                                alt="پروفایل">
+                        </th>
+                        <td>{{user.firstName + ' ' + user.lastName}}</td>
+                        <td>{{user.userName}}</td>
+                        <!-- options -->
+                        <td>
+                            <button class="btn btn-primary"><i class="fa fa-edit top-2 fs-13"></i></button>
+                            <button class="btn btn-danger"><i class="fa fa-trash fs-13"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation example" class="w-100 d-flex justify-content-end my-4">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

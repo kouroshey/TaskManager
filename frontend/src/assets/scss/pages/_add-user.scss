@@ -1,0 +1,48 @@
+.add-user-page {
+    .form-control::file-selector-button {
+        background-color: $primary-color !important;
+        color: $primary-color;
+        position: relative;
+    }
+
+    .choose-photo-parent {
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+    }
+
+    .choose-photo-input {
+        transition: all 0.3s ease-in-out;
+        position: relative;
+
+        input {
+            position: relative;
+        }
+
+        span {
+            position: absolute;
+            top: 20%;
+            color: #f8f8f8;
+            font-size: small;
+            right: 2%;
+            cursor: pointer;
+        }
+    }
+
+    .user-photo {
+        width: 150px;
+        height: 150px;
+    }
+
+    .user-photo-container‌ {
+        width: max-content;
+    }
+
+    .submit-btn {
+        width: 10rem;
+    }
+
+    textarea {
+        height: 13rem;
+    }
+}
