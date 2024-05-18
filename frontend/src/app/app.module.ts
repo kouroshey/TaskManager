@@ -29,7 +29,6 @@ import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     NumericInputDirective
   ],
   imports: [
