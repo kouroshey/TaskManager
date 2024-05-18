@@ -72,19 +72,6 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  // getCaptcha() {
-  //   try {
-  //     this.api.get('/get-captcha').subscribe(
-  //       (response: any) => {
-  //         this.captchImg = `data:image/jpg;base64,${response.image}`
-  //         this.captchaHashKey = response.hashKey
-  //       }
-  //     )
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
-
   showPasswordHandler() {
     this.showPass = !this.showPass
   }

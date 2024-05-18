@@ -1,8 +1,7 @@
-export interface Iuser {
+export interface IUser {
     avatar: string;
     firstName: string;
     lastName: string;
-    permission: string;
-    userCode: number;
+    email: string;
     userName: string;
 }

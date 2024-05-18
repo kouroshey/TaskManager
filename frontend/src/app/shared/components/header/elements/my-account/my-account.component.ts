@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Iuser } from "src/app/shared/model/user.model";
+import { IUser } from "src/app/shared/model/user.model";
 import { AuthService } from "src/app/shared/services/auth.service";
 
 @Component({
@@ -8,13 +8,12 @@ import { AuthService } from "src/app/shared/services/auth.service";
   styleUrls: ["./my-account.component.scss"],
 })
 export class MyAccountComponent implements OnInit {
-  userInfo: Iuser = {
+  userInfo: IUser = {
     avatar: '',
     lastName: 'mowri',
     firstName: 'Kourosh',
-    permission: 'admin',
-    userCode: 2154,
-    userName: 'Kouroshey'
+    userName: 'Kouroshey',
+    email: 'Kouroshmowri@gmai.com'
   }
 
   constructor(
