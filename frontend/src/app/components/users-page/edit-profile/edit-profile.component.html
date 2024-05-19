@@ -1,7 +1,7 @@
 <div>
     <div class="card add-user-page">
         <div class="card-body container-lg">
-            <form class="d-flex flex-column gap-3" `[formGroup]="editProfileForm" `>
+            <form class="d-flex flex-column gap-3" [formGroup]="editProfileForm">
                 <div class="row">
                     <div class="row">
                         <div class="col-4 mb-3">
@@ -40,7 +40,7 @@
                     </div>
                     <div class="row">
                         <div class="mb-3 col-4">
-                            <label for="paswword" class="form-label">پسورد</label>
+                            <label for="paswword" class="form-label">پسورد جدید</label>
                             <input formControlName="password" required type="password" class="form-control"
                                 id="password">
                             <div *ngIf="editProfileForm.controls.password.touched && editProfileForm.controls.password.errors?.required"

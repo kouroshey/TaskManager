@@ -45,7 +45,6 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.getCaptcha()
     this.activatedRout.data.subscribe(
       (response: any) => {
         this.captchImg = `data:image/jpg;base64,${response.image}`
@@ -54,20 +53,18 @@ export class SignupComponent implements OnInit {
     );
   }
 
-  login(params: FormGroup<any>) {
-    let loginDetails = {
+  signup(params: FormGroup<any>) {
+    let signpuDetails = {
       username: params.value.username,
       password: params.value.password,
-      captchaCode: params.value.captcha,
-      captchaHashKey: this.captchaHashKey,
-      rememberMe: this.rememberMe
+      email: params.value.email
     }
 
-    this.authService.login(loginDetails).subscribe((response: any) => {
+    this.authService.signup(signpuDetails).subscribe((response: any) => {
       if (response?.success) {
         localStorage.setItem('Token', response.accessToken)
         this.router.navigate(['/'])
-        this.toastr.success('شما با موفقیت وارد شدید!');
+        this.toastr.success('ثبت نام شما با موفقیت انجام شد!');
         this.accessToken = response.Token
       } else {
         console.log(response.message);

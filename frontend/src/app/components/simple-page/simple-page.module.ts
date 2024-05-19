@@ -10,4 +10,4 @@ import { SharedModule } from "src/app/shared/shared.module";
   declarations: [FirstPageComponent, SecondPageComponent],
   imports: [CommonModule, SimplePageRoutingModule, SharedModule],
 })
-export class SimplePageModule {}
+export class SimplePageModule { }
