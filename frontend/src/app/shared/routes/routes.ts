@@ -13,4 +13,8 @@ export const content: Routes = [
     path: "users",
     loadChildren: () => import("../../components/users-page/users-page.module").then((m) => m.UsersPageModule),
   },
+  {
+    path: "projects",
+    loadChildren: () => import("../../components/project-pages/project-pages.module").then((m) => m.ProjectPagesModule),
+  },
 ];

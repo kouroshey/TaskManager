@@ -25,6 +25,7 @@ import { LoginComponent } from './auth/login/login.component';
 
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ToastrModule } from 'ngx-toastr';
+import {ProjectPagesModule} from "./components/project-pages/project-pages.module";
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { ToastrModule } from 'ngx-toastr';
     //     // for Router use:
     LoadingBarRouterModule,
     //     // for Core use:
-    LoadingBarModule
+    LoadingBarModule,
+    ProjectPagesModule
   ],
   bootstrap: [AppComponent],
   providers: [
