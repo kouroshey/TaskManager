@@ -20,4 +20,6 @@ export const content: Routes = [
     path: "projects",
     loadChildren: () => import("../../components/project-pages/project-pages.module").then((m) => m.ProjectPagesModule),
   },
+  {path:"tasks",
+  loadChildren:()=>import("../../components/task-pages/task-pages.module").then((m)=>m.TaskPagesModule)}
 ];
