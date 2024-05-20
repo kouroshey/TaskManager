@@ -52,10 +52,9 @@ import {ProjectPagesModule} from "./components/project-pages/project-pages.modul
     LoadingBarRouterModule,
     //     // for Core use:
     LoadingBarModule,
-<<<<<<< HEAD
-=======
+
     ProjectPagesModule
->>>>>>> origin/Anvari
+
   ],
   bootstrap: [AppComponent],
   providers: [

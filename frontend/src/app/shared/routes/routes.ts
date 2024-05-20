@@ -15,12 +15,9 @@ export const content: Routes = [
     loadChildren: () => import("../../components/users-page/users-page.module").then((m) => m.UsersPageModule),
   },
   {
-<<<<<<< HEAD
     path: "",
-    component: DashboardComponent
-=======
+    component: DashboardComponent},{
     path: "projects",
     loadChildren: () => import("../../components/project-pages/project-pages.module").then((m) => m.ProjectPagesModule),
->>>>>>> origin/Anvari
   },
 ];

@@ -41,3 +41,7 @@
   background-color: #fff;
   border-bottom: 0 solid transparent;
 }
+
+.dropdown .dropdown-toggle:after{
+  content: '' !important;
+}

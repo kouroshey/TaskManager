@@ -6,13 +6,14 @@ import { AllProjectPageComponent } from './all-project-page/all-project-page.com
 import {ProjectPageRoutingModule} from './project-pages-routing.module'
 import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
 import {ReactiveFormsModule} from "@angular/forms";
+import {NgbDropdownModule} from "@ng-bootstrap/ng-bootstrap";
 
 
 
 @NgModule({
   declarations: [AddProjectPageComponent,EditProjectPageComponent,AllProjectPageComponent],
   imports: [
-    CommonModule,ProjectPageRoutingModule,NgPersianDatepickerModule,ReactiveFormsModule
+    CommonModule,ProjectPageRoutingModule,NgPersianDatepickerModule,ReactiveFormsModule,NgbDropdownModule
   ]
 })
 export class ProjectPagesModule { }
