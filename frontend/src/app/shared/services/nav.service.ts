@@ -28,7 +28,7 @@ export class NavService implements OnDestroy {
   // Search Box
   public search: boolean = false;
 
-  // Language
+  // Language 
   public language: boolean = false;
 
   // Mega Menu
@@ -82,16 +82,16 @@ export class NavService implements OnDestroy {
   MENUITEMS: Menu[] = [
     { path: "/dashboard", icon: "home", title: "داشبورد", active: true, type: "link", bookmark: true },
     {
-      title: "کارها",
+      title: "پروژه ها",
       icon: "project",
       type: "sub",
-      badgeType: "light-primary",
-      badgeValue: "2",
       active: false,
+      badgeType: "light-primary",
+      badgeValue: "1",
       children: [
-        { path: "/todo/projects", title: "پروژه ها", type: "link" },
-        { path: "/todo/tasks", title: "تسک ها", type: "link" },
-      ],
+        { path: "/projects/all", title: "همه پروژه ها", type: "link" },
+        { path: "/projects/add", title: "افزودن پروژه", type: "link" },
+      ]
     },
     {
       title: "کاربران",
@@ -106,18 +106,6 @@ export class NavService implements OnDestroy {
         { path: "/users/profile", title: "ویرایش پروفایل", type: "link" },
       ]
     },
-    {
-      title: "پروژه ها",
-      icon: "project",
-      type: "sub",
-      active: false,
-      badgeType: "light-primary",
-      badgeValue: "1",
-      children: [
-        { path: "/projects/all", title: "همه پروژه ها", type: "link" },
-        { path: "/projects/add", title: "افزودن پروژه", type: "link" },
-      ]
-    }
 
   ];
 

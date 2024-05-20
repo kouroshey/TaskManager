@@ -24,7 +24,7 @@ import { AppComponent } from './app.component';
 
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ToastrModule } from 'ngx-toastr';
-import {ProjectPagesModule} from "./components/project-pages/project-pages.module";
+import { ProjectPagesModule } from "./components/project-pages/project-pages.module";
 
 @NgModule({
   declarations: [
@@ -52,10 +52,6 @@ import {ProjectPagesModule} from "./components/project-pages/project-pages.modul
     LoadingBarRouterModule,
     //     // for Core use:
     LoadingBarModule,
-<<<<<<< HEAD
-=======
-    ProjectPagesModule
->>>>>>> origin/Anvari
   ],
   bootstrap: [AppComponent],
   providers: [
