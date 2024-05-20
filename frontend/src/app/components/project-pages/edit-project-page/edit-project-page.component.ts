@@ -12,11 +12,8 @@ export class EditProjectPageComponent implements OnInit {
 
   
   editProjectForm:FormGroup;
-  public project={
-    id:1,
-    title:"",
-    status:"active"
-  }
+  
+  public statusList=["active","complete","canceled"]
 
   constructor(
       private fb:FormBuilder,
@@ -27,9 +24,9 @@ export class EditProjectPageComponent implements OnInit {
       id:[1,Validators.required],
       title:["عنوان پروژه",[Validators.required,Validators.minLength(4)]],
       description:['لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد کتابهای زیادی در شصت و سه درصد گذشته حال و آینده'],
-      startDate:["19/8/1399",[Validators.required]],
-      endDate:["19/8/1402",Validators.required],
-      status:["active",Validators.required]
+      startDate:["1399/8/13",[Validators.required]],
+      endDate:["1402/8/28",Validators.required],
+      status:["complete",Validators.required]
 
     },{
       Validators:this.DateValidator
