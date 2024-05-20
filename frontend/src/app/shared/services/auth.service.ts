@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
 import { ApiService } from './api.service'
 
-import { Iuser } from '../../shared/model/user.model'
+import { IUser } from '../../shared/model/user.model'
 import { Observable } from 'rxjs';
 
 
@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 
 export class AuthService implements OnInit {
   currentPath: string;
-  user: Iuser;
+  user: IUser;
 
   constructor(
     private root: ActivatedRoute,

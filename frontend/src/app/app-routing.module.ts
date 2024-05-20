@@ -9,6 +9,7 @@ import { LoginGuard } from "./shared/guard/login-guard";
 import { RootResolver } from "./shared/resolvers/root.resolver"
 import { GetDashboardInfoResolver } from "./shared/resolvers/dashboard-info.resolver"
 import { AddUser } from "./components/users-page/add-user-page/add-user.component";
+import { SignupComponent } from "./auth/signup/signup.component";
 
 const routes: Routes = [
   {
@@ -21,9 +22,17 @@ const routes: Routes = [
     // }
   },
   {
-    path: "login",
-    component: LoginComponent,
-    canActivate: [LoginGuard]
+    path: "auth",
+    children: [
+      {
+        path: 'login',
+        component: LoginComponent
+      },
+      {
+        path: 'signup',
+        component: SignupComponent
+      }
+    ]
   },
   {
     path: "",

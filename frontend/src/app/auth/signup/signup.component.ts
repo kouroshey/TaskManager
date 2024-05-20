@@ -1,21 +1,21 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators, FormGroup } from "@angular/forms";
-import { Router, ActivatedRoute } from "@angular/router";
-import { ApiService } from '../../shared/services/api.service'
-import { AuthService } from '../../shared/services/auth.service'
-import { ToastrService } from "ngx-toastr";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { ApiService } from 'src/app/shared/services/api.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"],
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ["./signup.component.scss"]
 })
-
-export class LoginComponent implements OnInit {
+export class SignupComponent implements OnInit {
   encryptString: string;
   newUser = false;
-  loginForm: FormGroup;
+  signupForm: FormGroup;
   showPass = false;
+  showConfirm = false;
   error:
     { isError: boolean; errorMessage: string }
     = { isError: false, errorMessage: '' };
@@ -33,10 +33,15 @@ export class LoginComponent implements OnInit {
     private toastr: ToastrService,
     private activatedRout: ActivatedRoute,
   ) {
-    this.loginForm = this.fb.group({
-      username: ["", [Validators.required, Validators.minLength(3)]],
-      password: ["", [Validators.required]]
-    });
+    this.signupForm = this.fb.group({
+      username: ["", [Validators.required, Validators.pattern(/^[a-z0-9]+.{4,}$/)]],
+      password: ["", [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}$/),]],
+      confirmPassword: ["", [Validators.required]],
+      email: ["", [Validators.required, Validators.email]]
+    },
+      {
+        validators: this.passwordMatchValidator
+      });
   }
 
   ngOnInit() {
@@ -80,4 +85,19 @@ export class LoginComponent implements OnInit {
     this.rememberMe = !this.rememberMe
   }
 
+  showConfirmPassHandler() {
+    this.showConfirm = !this.showConfirm
+  }
+
+  passwordMatchValidator(group: FormGroup): { [key: string]: any } | null {
+    const password = group.get('password').value;
+    const confirmPassword = group.get('confirmPassword').value;
+
+    if (password !== confirmPassword) {
+      group.get('confirmPassword').setErrors({ passwordMismatch: true });
+      return { passwordMismatch: true };
+    }
+    group.get('confirmPassword').setErrors(null);
+    return null;
+  }
 }

@@ -13,4 +13,8 @@ export const content: Routes = [
     path: "users",
     loadChildren: () => import("../../components/users-page/users-page.module").then((m) => m.UsersPageModule),
   },
+  {
+    path: "auth",
+    loadChildren: () => import("../../auth/auth.module").then((m) => m.AuthModule),
+  },
 ];

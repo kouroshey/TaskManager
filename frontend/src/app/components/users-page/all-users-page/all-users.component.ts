@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Iuser } from 'src/app/shared/model/user.model';
 
 @Component({
     selector: 'app-all-users',
