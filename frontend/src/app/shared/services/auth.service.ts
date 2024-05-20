@@ -39,6 +39,22 @@ export class AuthService implements OnInit {
     }
   }
 
+  signup(params: {
+    username: string;
+    password: string;
+    email: string;
+  }): Observable<any> {
+    try {
+      return this.api.post('/api/authentication/login', {
+        "username": params.username,
+        "password": params.password,
+      });
+    } catch (error) {
+      console.log('Error:', error);
+      throw error;
+    }
+  }
+
   logout() {
     localStorage.removeItem('Token')
     this.router.navigate(['/login'])

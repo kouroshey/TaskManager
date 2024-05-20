@@ -1,0 +1,82 @@
+.dashboard {
+
+  p,
+  span {
+    font-size: medium;
+    font-weight: 700;
+  }
+
+  .title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: black;
+  }
+
+  .desktop-top {
+    .card {
+      border: rgb(211, 211, 211) 1px solid;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      svg {
+        transition: all 0.3s ease;
+        text-align: center;
+        width: 25px;
+        height: 25px;
+
+        &.stroke-icon {
+          stroke: var(--theme-deafult);
+        }
+
+        &.fill-icon {
+          fill: var(--theme-deafult);
+        }
+
+        &:hover {
+          transform: scale(1.01);
+        }
+      }
+
+      .card-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px !important;
+
+        p,
+        span {
+          color: $primary-color;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .teammate {
+    span {
+      width: max-content !important;
+    }
+
+    .teammate-container {
+      width: max-content !important;
+
+      img {
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        border: $light-text 1px solid;
+      }
+    }
+
+  }
+
+  .user-details {}
+
+  .dashboard-bottom-box {
+    border: 1px solid rgb(214, 214, 214);
+    min-height: 40%;
+    max-height: 100%;
+  }
+}
