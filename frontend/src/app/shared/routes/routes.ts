@@ -1,20 +1,21 @@
 import { Routes } from "@angular/router";
+import { DashboardComponent } from "src/app/components/dashboard/dashboard.component";
 export const content: Routes = [
   {
-    path: "simple-page",
-    loadChildren: () => import("../../components/simple-page/simple-page.module").then((m) => m.SimplePageModule,
-    ),
-  },
+    path: "todo",
+    loadChildren: () => import("../../components/todo/todo-page.module").then((m) => m.HomePageModule),
+  }
+  ,
   {
-    path: "single-page",
-    loadChildren: () => import("../../components/single-page/single-page.module").then((m) => m.SinglePageModule),
+    path: "auth",
+    loadChildren: () => import("../../auth/auth.module").then((m) => m.AuthModule),
   },
   {
     path: "users",
     loadChildren: () => import("../../components/users-page/users-page.module").then((m) => m.UsersPageModule),
   },
   {
-    path: "auth",
-    loadChildren: () => import("../../auth/auth.module").then((m) => m.AuthModule),
+    path: "",
+    component: DashboardComponent
   },
 ];

@@ -26,6 +26,7 @@ import { DecimalPipe } from "@angular/common";
 import { SvgIconComponent } from "./components/svg-icon/svg-icon.component";
 import { SwiperModule } from "swiper/angular";
 import { SwiperComponent } from "./components/header/elements/swiper/swiper.component";
+import { DashboardComponent } from "../components/dashboard/dashboard.component";
 
 @NgModule({
   declarations: [
@@ -44,9 +45,10 @@ import { SwiperComponent } from "./components/header/elements/swiper/swiper.comp
     MyAccountComponent,
     SvgIconComponent,
     SwiperComponent,
+    DashboardComponent
   ],
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, NgbModule, SwiperModule],
   providers: [NavService, LayoutService, DecimalPipe],
   exports: [NgbModule, FormsModule, ReactiveFormsModule, LoaderComponent, BreadcrumbComponent, FeatherIconsComponent, TapToTopComponent, SvgIconComponent, SwiperModule],
 })
-export class SharedModule {}
+export class SharedModule { }
