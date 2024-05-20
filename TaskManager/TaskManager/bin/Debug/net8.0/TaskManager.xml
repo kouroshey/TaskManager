@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TaskManager</name>
+    </assembly>
+    <members>
+        <member name="M:TaskManager.Controllers.AuthController.Login(TaskManager.Models.Dto.LoginDto)">
+            <summary>
+            ورود کاربر به سیستم و صادر کردن توکن
+            </summary>
+            <param name="command">اطلاعات ورود نام کاربری و کلمه عبور.</param>
+            <returns>اطلاعات ورود و توکن JWT در صورت موفقیت ورود یا پیام خطا در صورت وقوع مشکل.</returns>
+        </member>
+        <member name="M:TaskManager.Controllers.AuthController.GetMaster(System.String)">
+            <summary>
+            دریافت اطلاعات کاربر بر اساس توکن.
+            </summary>
+            <param name="token">توکن احراز هویت کاربر.</param>
+            <returns>
+            اگر توکن معتبر باشد، اطلاعات کاربر را بازمی‌گرداند.
+            در غیر این صورت، پیام خطا بازگردانده می‌شود.
+            </returns>
+            <response code="200">اگر توکن معتبر باشد، اطلاعات کاربر بازگردانده می‌شود.</response>
+            <response code="404">اگر توکن معتبر نباشد، پیام خطا بازگردانده می‌شود.</response>
+        </member>
+        <member name="M:TaskManager.Controllers.UserController.GetAll(TaskManager.Models.Dto.PaginationParameters)">
+            <summary>
+            دریافت لیستی از کاربران با صفحه‌بندی.
+            </summary>
+            <returns>لیست کاربران به همراه اطلاعات صفحه‌بندی.</returns>
+        </member>
+        <member name="M:TaskManager.Controllers.UserController.Get(System.Int32)">
+            <summary>
+            دریافت اطلاعات یک کاربر بر اساس شناسه.
+            </summary>
+            <param name="id">شناسه کاربر مورد نظر.</param>
+            <returns>اطلاعات کاربر یا پیام خطا در صورت عدم یافتن.</returns>
+        </member>
+        <member name="M:TaskManager.Controllers.UserController.Create(TaskManager.Models.Dto.CreateUserDto)">
+            <summary>
+            ایجاد یک کاربر جدید.
+            </summary>
+            <param name="model">اطلاعات مورد نیاز برای ایجاد کاربر.</param>
+            <returns>پیام موفقیت آمیز یا پیام خطا در صورت وقوع مشکل.</returns>
+        </member>
+        <member name="M:TaskManager.Controllers.UserController.UpdateAsync(TaskManager.Models.Dto.EditUserDto)">
+            <summary>
+            به‌روزرسانی اطلاعات یک کاربر.
+            </summary>
+            <param name="model">اطلاعات جدید کاربر برای به‌روزرسانی.</param>
+            <returns>پیام موفقیت آمیز یا پیام خطا در صورت وقوع مشکل.</returns>
+        </member>
+        <member name="M:TaskManager.Controllers.UserController.ChangePassword(TaskManager.Models.Dto.ChangePassword)">
+            <summary>
+            تغییر رمز عبور کاربر.
+            </summary>
+            <param name="model.Id.Id"></param>
+            <param name="model.OldPassword.OldPassword"></param>
+            <param name="model.NewPassword.NewPassword"></param>
+            <returns>پیام موفقیت آمیز یا پیام خطا در صورت وقوع مشکل.</returns>
+        </member>
+        <member name="M:TaskManager.Controllers.UserController.ToggleActive(System.Int32)">
+            <summary>
+            فعال یا غیرفعال کردن یک کاربر.
+            </summary>
+            <param name="id">شناسه کاربر مورد نظر.</param>
+            <returns>پیام موفقیت آمیز یا پیام خطا در صورت وقوع مشکل.</returns>
+        </member>
+        <member name="T:TaskManager.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:TaskManager.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:TaskManager.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:TaskManager.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="P:TaskManager.Models.Dto.ChangePassword.Id">
+            <summary>
+            شناسه کاربر
+            </summary>                                                                                                                                 
+        </member>
+        <member name="P:TaskManager.Models.Dto.ChangePassword.OldPassword">
+             <summary>
+            گذرواژه قبلی
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.ChangePassword.NewPassword">
+             <summary>
+            گذرواژه جدید
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.PaginationParameters.CurrentPage">
+            <example>
+            1
+            </example>
+        </member>
+        <member name="P:TaskManager.Models.Dto.PaginationParameters.ItemsPerPage">
+            <example>
+            10
+            </example>
+        </member>
+    </members>
+</doc>
