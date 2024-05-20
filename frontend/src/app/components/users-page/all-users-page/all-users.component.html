@@ -13,11 +13,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let user of usersDetails">
+                    <tr *ngFor="let user of userData.users">
                         <th scope="row">{{user.id}}</th>
                         <th scope="row">
                             <img *ngIf="user.avatar && user.avatar !==''" [src]="user.id" alt="پروفایل">
-                            <img *ngIf="!user.avatar && user.avatar ===''" src="assets/images/default-avatar.png"
+                            <img *ngIf="!user.avatar && user.avatar ===''" src="assets/images/user.jpg"
                                 alt="پروفایل">
                         </th>
                         <td>{{user.firstName + ' ' + user.lastName}}</td>
@@ -30,18 +30,23 @@
                     </tr>
                 </tbody>
             </table>
-            <nav aria-label="Page navigation example" class="w-100 d-flex justify-content-end my-4">
+            <nav *ngIf="userData.paginationHeader.totalPages>1" aria-label="Page navigation example" class="w-100 d-flex justify-content-end my-4">
                 <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
+                    <li *ngIf="userData.paginationHeader.currentPage > 1 " class="page-item">
+                        <a class="page-link" href="javascript:;" (click)="showUsers(userData.paginationHeader.currentPage-1,itemsPerPage)"  aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
+                    <li *ngIf="userData.paginationHeader.currentPage > 1" class="page-item">
+                        <a class="page-link" href="javascript:;" (click)="showUsers(userData.paginationHeader.currentPage-1,itemsPerPage)" >{{userData.paginationHeader.currentPage-1}}</a>
+                    </li>
+                    <li  class="page-item">
+                        <a class="page-link disabled" disabled="" href="javascript:;" >{{userData.paginationHeader.currentPage}}</a>
+                    </li>
+                    <li *ngIf="userData.paginationHeader.currentPage<userData.paginationHeader.totalPages" class="page-item">
+                        <a class="page-link" (click)="showUsers(userData.paginationHeader.currentPage+1,itemsPerPage)" href="javascript:;">{{userData.paginationHeader.currentPage+1}}</a></li>
+                    <li *ngIf="userData.paginationHeader.currentPage<userData.paginationHeader.totalPages" class="page-item">
+                        <a class="page-link" href="javascript:;" (click)="showUsers(userData.paginationHeader.currentPage+1,itemsPerPage)"  aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
@@ -49,4 +54,62 @@
             </nav>
         </div>
     </div>
+
+
+    <ng-template #content let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+        <div class="p-3">
+            <div class="card user-card">
+                <div class="card-header">
+                    <h5>Profile</h5>
+                </div>
+                <div class="card-block">
+                    <div class="user-image">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="img-radius" alt="User-Profile-Image">
+                    </div>
+                    <h6 class="f-w-600 m-t-25 m-b-10">Alessa Robert</h6>
+                    <p class="text-muted">Active | Male | Born 23.05.1992</p>
+                    <hr>
+                    <p class="text-muted m-t-15">Activity Level: 87%</p>
+                    <ul class="list-unstyled activity-leval">
+                        <li class="active"></li>
+                        <li class="active"></li>
+                        <li class="active"></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                    <div class="bg-c-blue counter-block m-t-10 p-20">
+                        <div class="row">
+                            <div class="col-4">
+                                <i class="fa fa-comment"></i>
+                                <p>1256</p>
+                            </div>
+                            <div class="col-4">
+                                <i class="fa fa-user"></i>
+                                <p>8562</p>
+                            </div>
+                            <div class="col-4">
+                                <i class="fa fa-suitcase"></i>
+                                <p>189</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="m-t-15 text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <hr>
+                    <div class="row justify-content-center user-social-link">
+                        <div class="col-auto"><a href="#!"><i class="fa fa-facebook text-facebook"></i></a></div>
+                        <div class="col-auto"><a href="#!"><i class="fa fa-twitter text-twitter"></i></a></div>
+                        <div class="col-auto"><a href="#!"><i class="fa fa-dribbble text-dribbble"></i></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        
+    </ng-template>
+    
 </div>
