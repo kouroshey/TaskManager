@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {ApiService} from "../../../shared/services/api.service";
+import {Jalali} from "jalali-ts";
 
 @Component({
   selector: 'app-edit-project-page',
@@ -8,13 +11,65 @@ import { Component, OnInit } from '@angular/core';
 export class EditProjectPageComponent implements OnInit {
 
   
+  editProjectForm:FormGroup;
   public project={
     id:1,
-    title:""
+    title:"",
+    status:"active"
+  }
+
+  constructor(
+      private fb:FormBuilder,
+      private api:ApiService
+  ){
+
+    this.editProjectForm= this.fb.group({
+      id:[1,Validators.required],
+      title:["عنوان پروژه",[Validators.required,Validators.minLength(4)]],
+      description:['لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد کتابهای زیادی در شصت و سه درصد گذشته حال و آینده'],
+      startDate:["19/8/1399",[Validators.required]],
+      endDate:["19/8/1402",Validators.required],
+      status:["active",Validators.required]
+
+    },{
+      Validators:this.DateValidator
+    })
   }
   
   ngOnInit(): void {
       
+  }
+
+  DateValidator(form:FormGroup):{ [key: string]: any } | null{
+
+    console.log('start')
+    const start=form.get('startDate').value;
+    const end=form.get('endDate').value;
+
+    const nowD=Jalali.now()
+    nowD.format('YYYY/MM/DD HH:mm:ss')
+    const startD=Jalali.parse(start);
+    const endD=Jalali.parse(end);
+
+
+    if(nowD.valueOf() > startD.valueOf())
+    {
+      form.get('startDate').setErrors({startValid:true})
+
+      return {startValid:true}
+    }
+    if(startD.valueOf() > endD.valueOf())
+    {
+      form.get('endDate').setErrors({endValid:true})
+      return {endValid:true}
+    }
+
+
+    form.get('startDate').setErrors(null)
+    form.get('endDate').setErrors(null)
+
+    return null;
+
   }
 
 }

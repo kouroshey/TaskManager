@@ -1,1 +1,54 @@
-<p>edit-project-page works!</p>
+<div class="card ">
+    <div class="card-body container-lg">
+        <form class="d-flex flex-column gap-3"  [formGroup]="editProjectForm" >
+            <div class="">
+                <div class=" mb-3">
+                    <label for="title" class="form-label">عنوان پروژه </label>
+                    <input required formControlName="title" type="text" class="form-control" id="title" />
+                    <div *ngIf="editProjectForm.controls.title.touched && editProjectForm.controls.title.errors?.required"
+                         class="text text-danger mt-1">وارد کردن عنوان الزامی است!</div>
+                    <div *ngIf="editProjectForm.controls.title.touched && editProjectForm.controls.title.errors?.minlength"
+                         class="text text-danger mt-1">عنوان باید حداقل 4 کاراکتر باشد!
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="desc">توضیحات پروژه</label>
+                    <textarea class="w-100 form-control" formControlName="description" rows="10" name="desc"></textarea>
+                </div>
+
+                <div class="row ">
+                    <div class="col-4 mb-3">
+                        <label for="startDate" class="form-label">تاریخ شروع</label>
+                        <ng-persian-datepicker >
+                            <input required formControlName="startDate" type="text" class="form-control" id="startDate" />
+                        </ng-persian-datepicker>
+                        <div *ngIf="editProjectForm.controls.startDate.touched && editProjectForm.controls.startDate.errors?.required"
+                             class="text text-danger mt-1">وارد کردن تاریخ شروع الزامی است!</div>
+                        <div *ngIf="editProjectForm.controls.startDate.touched && editProjectForm.controls.startDate.errors?.startValid"
+                             class="text text-danger mt-1">تاریخ شروع  صحیح نمی باشد
+                        </div>
+                    </div>
+                    <div class="col-4 mb-3">
+                        <label for="endDate" class="form-label">تاریخ پایان</label>
+                        <ng-persian-datepicker >
+                            <input required formControlName="endDate" type="text" class="form-control" id="endDate" />
+                        </ng-persian-datepicker>
+                        <div *ngIf="editProjectForm.controls.endDate.touched && editProjectForm.controls.endDate.errors?.required"
+                             class="text text-danger mt-1">وارد کردن تاریخ پایان الزامی است!
+                        </div>
+                        <div *ngIf="editProjectForm.controls.endDate.touched && editProjectForm.controls.endDate.errors?.endValid"
+                             class="text text-danger mt-1">
+                            تاریخ پایان قبل از تاریخ شروع نمی تواند باشد
+                        </div>
+                    </div>
+
+                </div>
+                <div class=" d-flex flex-column gap-2">
+
+                    <button type="submit" class="btn btn-success my-4 align-self-end submit-btn">ویرایش</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
