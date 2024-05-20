@@ -105,6 +105,18 @@ export class NavService implements OnDestroy {
         { path: "/users/add", title: "افزودن کاربر", type: "link" },
         { path: "/users/profile", title: "ویرایش پروفایل", type: "link" },
       ]
+    },
+    {
+      title: "پروژه ها",
+      icon: "project",
+      type: "sub",
+      active: false,
+      badgeType: "light-primary",
+      badgeValue: "1",
+      children: [
+        { path: "/projects/all", title: "همه پروژه ها", type: "link" },
+        { path: "/projects/add", title: "افزودن پروژه", type: "link" },
+      ]
     }
 
   ];
