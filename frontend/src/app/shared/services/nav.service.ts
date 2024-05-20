@@ -80,15 +80,17 @@ export class NavService implements OnDestroy {
   }
 
   MENUITEMS: Menu[] = [
+    { path: "/dashboard", icon: "home", title: "داشبورد", active: true, type: "link", bookmark: true },
     {
-      title: "خانه",
-      icon: "home",
+      title: "کارها",
+      icon: "project",
       type: "sub",
       badgeType: "light-primary",
       badgeValue: "2",
-      active: true,
+      active: false,
       children: [
-        { path: "/simple-page/first-page", title: "صفحه اول", type: "link" },
+        { path: "/todo/projects", title: "پروژه ها", type: "link" },
+        { path: "/todo/tasks", title: "تسک ها", type: "link" },
       ],
     },
     {
