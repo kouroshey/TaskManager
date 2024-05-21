@@ -33,4 +33,8 @@ node_modules/
 
 # Logs and temporary files
 *.log
+<<<<<<<< HEAD:.gitignore
 *.tmp
+========
+*.tmp
+>>>>>>>> 2e1b7df0daa327bd296fe8c1325066963ee806e3:.gitigonre
