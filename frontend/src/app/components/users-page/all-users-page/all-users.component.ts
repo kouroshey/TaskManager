@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/shared/services/api.service';
 
 @Component({
     selector: 'app-all-users',
@@ -37,7 +38,14 @@ export class AllUsers implements OnInit {
             userName: 'Kouroshey'
         },
     ]
-    constructor() { }
+    constructor(private api: ApiService) { }
 
     ngOnInit() { }
+
+    request() {
+        this.api.post('http://192.168.10.167/api/user/get-all', {
+            "currentPage": 0,
+            "itemsPerPage": 10
+        }).subscribe(data => console.log(data))
+    }
 }

@@ -16,6 +16,7 @@ const routes: Routes = [
     path: "",
     component: ContentComponent,
     children: content,
+    canActivate: [LoginGuard]
     // resolve: {
     //   masterInfo: RootResolver,
     //   dashboardInfo: GetDashboardInfoResolver

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from "./shared/shared.module";
@@ -25,6 +25,7 @@ import { AppComponent } from './app.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ToastrModule } from 'ngx-toastr';
 import { ProjectPagesModule } from "./components/project-pages/project-pages.module";
+import { ResponseInterceptor } from './shared/interceptors/response.interceptor';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,7 @@ import { ProjectPagesModule } from "./components/project-pages/project-pages.mod
   ],
   bootstrap: [AppComponent],
   providers: [
-    LoginGuard, SharedModule
+    LoginGuard, SharedModule,
     // { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor, multi: true },
   ]
 })

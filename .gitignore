@@ -1,0 +1,22 @@
+# .NET files
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+bin/
+obj/
+
+# Angular files
+dist/
+out-tsc/
+node_modules/
+.angular/
+.idea/
+.vscode/
+.angular-build/
+.tmp/
+
+# Logs and temporary files
+*.log
+*.tmp
