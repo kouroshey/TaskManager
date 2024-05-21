@@ -3,11 +3,34 @@
 /workspace.xml
 # Rider ignored files
 /modules.xml
+/.idea.TaskManager-001.iml
 /projectSettingsUpdater.xml
-/.idea.TaskManager.iml
 /contentModel.xml
 # Editor-based HTTP Client requests
 /httpRequests/
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+
+# .NET files
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+bin/
+obj/
+
+# Angular files
+dist/
+out-tsc/
+node_modules/
+.angular/
+.idea/
+.vscode/
+.angular-build/
+.tmp/
+
+# Logs and temporary files
+*.log
+*.tmp
