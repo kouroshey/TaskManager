@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaskManager.Models;
 
@@ -11,9 +12,11 @@ using TaskManager.Models;
 namespace TaskManager.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240521075201_fix")]
+    partial class fix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace TaskManager.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("ProjectUser", b =>
-                {
-                    b.Property<int>("ProjectsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProjectsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("ProjectUser");
-                });
 
             modelBuilder.Entity("TaskManager.Models.Entity.Chat", b =>
                 {
@@ -78,9 +66,6 @@ namespace TaskManager.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -89,14 +74,7 @@ namespace TaskManager.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ProjectId");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Comments");
                 });
@@ -161,8 +139,7 @@ namespace TaskManager.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjectId")
-                        .IsUnique();
+                    b.HasIndex("ProjectId");
 
                     b.HasIndex("UserId");
 
@@ -181,6 +158,9 @@ namespace TaskManager.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CommentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
@@ -195,10 +175,17 @@ namespace TaskManager.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ProjectId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CommentId");
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("Users");
                 });
@@ -228,21 +215,6 @@ namespace TaskManager.Migrations
                     b.ToTable("UserTokens");
                 });
 
-            modelBuilder.Entity("ProjectUser", b =>
-                {
-                    b.HasOne("TaskManager.Models.Entity.Project", null)
-                        .WithMany()
-                        .HasForeignKey("ProjectsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TaskManager.Models.Entity.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("TaskManager.Models.Entity.Chat", b =>
                 {
                     b.HasOne("TaskManager.Models.Entity.Project", "Project")
@@ -252,26 +224,7 @@ namespace TaskManager.Migrations
                         .IsRequired();
 
                     b.HasOne("TaskManager.Models.Entity.User", "User")
-                        .WithMany("Chats")
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Project");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("TaskManager.Models.Entity.Comment", b =>
-                {
-                    b.HasOne("TaskManager.Models.Entity.Project", "Project")
-                        .WithMany("Comments")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TaskManager.Models.Entity.User", "User")
-                        .WithMany("Comments")
+                        .WithMany()
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -284,13 +237,13 @@ namespace TaskManager.Migrations
             modelBuilder.Entity("TaskManager.Models.Entity.Task", b =>
                 {
                     b.HasOne("TaskManager.Models.Entity.Project", "Project")
-                        .WithOne("Tasks")
-                        .HasForeignKey("TaskManager.Models.Entity.Task", "ProjectId")
+                        .WithMany("Tasks")
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TaskManager.Models.Entity.User", "User")
-                        .WithMany("Task")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -298,6 +251,17 @@ namespace TaskManager.Migrations
                     b.Navigation("Project");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TaskManager.Models.Entity.User", b =>
+                {
+                    b.HasOne("TaskManager.Models.Entity.Comment", null)
+                        .WithMany("Users")
+                        .HasForeignKey("CommentId");
+
+                    b.HasOne("TaskManager.Models.Entity.Project", null)
+                        .WithMany("Users")
+                        .HasForeignKey("ProjectId");
                 });
 
             modelBuilder.Entity("TaskManager.Models.Entity.UserToken", b =>
@@ -311,23 +275,22 @@ namespace TaskManager.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("TaskManager.Models.Entity.Comment", b =>
+                {
+                    b.Navigation("Users");
+                });
+
             modelBuilder.Entity("TaskManager.Models.Entity.Project", b =>
                 {
                     b.Navigation("Chats");
 
-                    b.Navigation("Comments");
-
                     b.Navigation("Tasks");
+
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("TaskManager.Models.Entity.User", b =>
                 {
-                    b.Navigation("Chats");
-
-                    b.Navigation("Comments");
-
-                    b.Navigation("Task");
-
                     b.Navigation("Tokens");
                 });
 #pragma warning restore 612, 618

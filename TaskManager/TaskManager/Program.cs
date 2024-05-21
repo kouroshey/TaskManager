@@ -80,9 +80,15 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 
+    
     c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory,
         $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
 });
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ListenAnyIP(5000); // شنود روی پورت 5000
+});
+
 
 builder.Services.AddCors(options =>
 {
@@ -96,14 +102,20 @@ builder.Services.AddCors(options =>
         });
 });
 
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"));
+    app.UseSwaggerUI();
 }
-
+// if (app.Environment.IsDevelopment())
+// {
+//     app.UseSwagger();
+//     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"));
+// }
+app.UseHttpsRedirection();
 app.UseCors("AllowAllOrigins");
 
 app.UseAuthentication();

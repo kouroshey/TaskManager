@@ -38,7 +38,7 @@ namespace TaskManager.Controllers
                     return BadRequest(result);
                 }
 
-                var newComment = new Comment(comment.Title, comment.Text);
+                var newComment = new Comment(comment.Title, comment.Text,comment.UserID,comment.ProjectId);
 
                 _context.Comments.Add(newComment);
                 _context.SaveChanges();

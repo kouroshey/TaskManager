@@ -9,9 +9,16 @@
         public string Password { get; set; }
         public string Avatar { get; set; }
         public bool IsActive { get; set; }
-
+        
+        
+        public IEnumerable<Task>? Task { get;  set; }
+        public ICollection<Comment> Comments { get;  set; }
+        public ICollection<Project> Projects { get;  set; }
+        public ICollection<Chat> Chats { get;  set; }
         public ICollection<UserToken> Tokens { get; set; }
+        
 
+        
         public User(string? userName, string? firstName, string lastName, string password, string avatar)
         {
             UserName = userName;
