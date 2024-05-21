@@ -1,1 +1,45 @@
-<p>chat works!</p>
+<div class="row vh-100 chat-wrapper">
+  <div class="col-sm-2 h-80 chat-sidebar">
+    <div class="card">
+      <div class="card-body d-flex flex-column gap-3">
+        <div class="project-name-container border-bottom-1 gap-2">
+          <span class="project-name">نام پروژه:</span>
+          <span class="project-name-title">پروژه خیلی سخت</span>
+        </div>
+        <div class="project-name-container d-flex gap-2 align-items-center members-container">
+          <h5 class="project-name">اعضا:‌</h5>
+          <div class="d-flex gap-0">
+            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Avatar"
+              width="28" height="28">
+            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="rounded-circle mr-1" alt="Avatar"
+              width="28" height="28">
+          </div>
+        </div>
+        <div>
+          <p class="mb-2 text-black font-weight-bold">میزان پیشرفت <span class="float-left">100%</span></p>
+          <div class="progress progress-sm">
+            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0"
+              aria-valuemax="50" style="width: 100%;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="bg-primary btn return-btn" routerLink="/projects/all">بازگشت</button>
+    </div>
+  </div>
+  <div class="col-sm-10 h-80 chat-main">
+    <div class="card">
+      <div class="card-body">
+        <ul class="chat-navbar navbar d-flex gap-2 justify-content-start gap-3">
+          @for (item of navItems; track $index) {
+          <li (click)="onNavClick(item.id)" class="nav-item" [ngClass]="activeTab === item.id ? 'active' : ''">
+            <a class="nav-link">{{item.title}}</a>
+          </li>
+          }
+        </ul>
+        <app-tasks *ngIf="activeTab === 2"></app-tasks>
+        <app-conversation *ngIf="activeTab === 1"></app-conversation>
+      </div>
+    </div>
+  </div>
+</div>

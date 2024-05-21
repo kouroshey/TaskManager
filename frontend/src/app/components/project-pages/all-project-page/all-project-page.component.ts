@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { ChatService } from 'src/app/shared/services/chat.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-project-page',
@@ -9,7 +10,7 @@ import { ChatService } from 'src/app/shared/services/chat.service';
 })
 export class AllProjectPageComponent implements OnInit {
 
-  constructor(private chatService: ChatService) {
+  constructor(private router: Router) {
 
   }
   ngOnInit(): void { }
@@ -70,6 +71,12 @@ export class AllProjectPageComponent implements OnInit {
   ]
 
   getProjects() { }
+
+  onClick(projectId) {
+    // request to api with projectId as params
+    // if success then navigate to projects/chat/:projectId
+    this.router.navigate([`projects/chat/${projectId}`])
+  }
 
 
 }

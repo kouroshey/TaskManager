@@ -1,0 +1,12 @@
+<div class="pt-4 pb-4">
+  <ul class="list-group list-group-light">
+    @for (task of taskList; track $index) {
+    <li class="list-group-item">
+      <input name="task" class="form-check-input me-1" type="checkbox" (change)="onChange(task.id)" value=""
+        aria-label="..." />
+      <label [htmlFor]="task" class="task-title text-dark"
+        [ngClass]="task.done ? 'task-done' : ''">{{task.title}}</label>
+    </li>
+    }
+  </ul>
+</div>

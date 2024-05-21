@@ -3,6 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { AllProjectPageComponent } from "./all-project-page/all-project-page.component";
 import { AddProjectPageComponent } from "./add-project-page/add-project-page.component";
 import { EditProjectPageComponent } from "./edit-project-page/edit-project-page.component";
+import { ChatComponent } from "./chat/chat.component";
 
 
 const routes: Routes = [
@@ -24,6 +25,10 @@ const routes: Routes = [
       {
         path: 'edit',
         component: EditProjectPageComponent
+      },
+      {
+        path: 'chat/:id',
+        component: ChatComponent
       },
     ]
   },

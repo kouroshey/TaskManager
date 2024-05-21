@@ -2,9 +2,11 @@
 	.row {
 		margin: 15px;
 	}
+
 	button:focus {
 		outline: none !important;
 	}
+
 	.theme-form .form-group {
 		margin-bottom: 15px;
 	}
@@ -18,13 +20,16 @@
 			align-items: center;
 		}
 	}
+
 	.btn {
 		margin-right: 5px;
 		vertical-align: -12px;
-		float:right;
+		float: right;
+
 		[dir="rtl"] & {
-			float:left;
+			float: left;
 		}
+
 		svg {
 			vertical-align: middle;
 			height: 16px;
@@ -68,6 +73,7 @@
 		margin-bottom: -30px;
 	}
 }
+
 .project-box {
 	border: 1px solid $light-semi-gray;
 	border-radius: 5px;
@@ -173,6 +179,19 @@
 			&::after {
 				display: none;
 			}
+		}
+	}
+}
+
+
+.projects {
+	.project-card {
+		transition: all 0.3s ease-in-out;
+		cursor: pointer;
+
+		&:hover {
+			transform: translateY(-10px);
+			box-shadow: 0 10px 25px rgb(177, 177, 177);
 		}
 	}
 }
