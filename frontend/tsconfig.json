@@ -5,7 +5,12 @@
   To learn more about this file see: https://angular.io/config/solution-tsconfig.
 */
 {
-  "files": [],
+  "files": [
+    "src/app/shared/shared.module.ts",
+  ],
+  "include": [
+    "src/app/shared/shared.module.ts",
+  ],
   "references": [
     {
       "path": "./tsconfig.app.json"

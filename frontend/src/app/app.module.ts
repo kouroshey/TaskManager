@@ -58,7 +58,7 @@ import {ProjectPagesModule} from "./components/project-pages/project-pages.modul
   ],
   bootstrap: [AppComponent],
   providers: [
-    LoginGuard,
+    LoginGuard, SharedModule
     // { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor, multi: true },
   ]
 })
