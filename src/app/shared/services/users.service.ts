@@ -28,10 +28,11 @@ export class UsersService {
     }})
   }
 
-  public addUser(params:{}):Observable<any>{
+  public addUser(user:FormData):Observable<any>{
    try{
-    return this.http.post<any>(this.baseUrl+'/api/user/create',params,{headers: {
-      'Authorization': `Bearer ${localStorage.getItem('Token')}`
+    return this.http.post<any>(this.baseUrl+'/api/user/create',user,{headers: {
+      'Authorization': `Bearer ${localStorage.getItem('Token')}`,
+      'Content-Type': 'multipart/form-data'
     }})
    }
    catch (e){
