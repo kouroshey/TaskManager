@@ -3,6 +3,8 @@ import { DOCUMENT } from "@angular/common";
 import { NavService } from "../../services/nav.service";
 import { LayoutService } from "../../services/layout.service";
 import SwiperCore, { Navigation, Pagination, Autoplay } from "swiper";
+import { ActivatedRoute } from "@angular/router";
+import { Location } from "@angular/common";
 
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 @Component({
@@ -14,10 +16,16 @@ export class HeaderComponent implements OnInit {
   public elem: any;
   @Input() userInfo: any
 
-  constructor(public layout: LayoutService, public navServices: NavService, @Inject(DOCUMENT) private document: any) { }
+  constructor(
+    public layout: LayoutService,
+    public navServices: NavService,
+    @Inject(DOCUMENT) private document: any,
+    private location: Location
+  ) { }
 
   ngOnInit() {
     this.elem = document.documentElement;
+    console.log(this.location.path());
   }
 
   sidebarToggle() {
@@ -71,4 +79,6 @@ export class HeaderComponent implements OnInit {
       }
     }
   }
+
+
 }

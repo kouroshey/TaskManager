@@ -1,1 +1,55 @@
-<p>chat works!</p>
+<div class="row vh-100 chat-wrapper">
+  <div class="col-sm-2 h-80 chat-sidebar">
+    <div class="card">
+      <div class="card-body d-flex flex-column gap-3">
+        <div class="project-name-container border-bottom-1 gap-2">
+          <span class="project-name">نام پروژه:</span>
+          <span class="project-name-title">پروژه خیلی سخت</span>
+        </div>
+        <div class="project-name-container gap-2 members-container">
+          <h5 class="project-name">اعضا:‌</h5>
+          <div class="customers d-inline-block avatar-group">
+            <ul>
+              <li class="d-inline-block"><img class="img-50 rounded-circle" src="assets/images/user/3.jpg" alt="" />
+              </li>
+              <li class="d-inline-block"><img class="img-50 rounded-circle" src="assets/images/user/5.jpg" alt="" />
+              </li>
+              <li class="d-inline-block"><img class="img-50 rounded-circle" src="assets/images/user/1.jpg" alt="" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <p class="mb-2 text-black font-weight-bold">میزان پیشرفت <span class="float-left">100%</span></p>
+          <div class="progress progress-sm">
+            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0"
+              aria-valuemax="50" style="width: 100%;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="bg-primary btn return-btn" routerLink="/projects/all">بازگشت</button>
+    </div>
+  </div>
+  <div class="col-sm-10 h-80 chat-main">
+    <div class="card">
+      <div class="card-body">
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active3" (navChange)="onNavChange1($event)" class="nav-tabs">
+          <li [ngbNavItem]="1">
+            <a ngbNavLink>وظایف</a>
+            <ng-template ngbNavContent>
+              <app-tasks></app-tasks>
+            </ng-template>
+          </li>
+          <li [ngbNavItem]="2">
+            <a ngbNavLink>گفتگو</a>
+            <ng-template ngbNavContent>
+              <app-conversation></app-conversation>
+            </ng-template>
+          </li>
+        </ul>
+        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+      </div>
+    </div>
+  </div>
+</div>
