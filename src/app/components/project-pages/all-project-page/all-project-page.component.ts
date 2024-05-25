@@ -9,16 +9,6 @@ import { Router } from '@angular/router';
   styleUrl: './all-project-page.component.scss'
 })
 export class AllProjectPageComponent implements OnInit {
-
-  constructor(private router: Router) {
-
-  }
-  ngOnInit(): void { }
-
-  chatDetailsGetter() {
-
-  }
-
   public ProjectList = [
     {
       id: 1,
@@ -69,6 +59,16 @@ export class AllProjectPageComponent implements OnInit {
       status: 'active'
     },
   ]
+  constructor(private router: Router) {
+
+  }
+  ngOnInit(): void { }
+
+  chatDetailsGetter() {
+
+  }
+
+
 
   getProjects() { }
 

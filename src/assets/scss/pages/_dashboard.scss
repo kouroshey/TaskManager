@@ -2,14 +2,24 @@
 
   p,
   span {
-    font-size: medium;
+    font-size: small;
     font-weight: 700;
   }
 
   .title {
-    font-size: 2rem;
+    font-size: 1rem;
     font-weight: 600;
     color: black;
+  }
+
+  .task-card {
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 25px rgb(177, 177, 177);
+    }
   }
 
   .desktop-top {

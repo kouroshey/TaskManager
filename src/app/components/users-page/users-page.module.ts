@@ -10,7 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [
     AllUsers,
     AddUser,
-    EditProfileComponent,
+    EditProfileComponent
   ],
   imports: [CommonModule,
     UsersPageRoutingModule, SharedModule, FormsModule, ReactiveFormsModule]
