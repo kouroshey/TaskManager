@@ -30,7 +30,7 @@
               <div class="todo-list-footer ms-2">
                 <div class="add-task-btn-wrapper">
                   <span class="add-task-btn">
-                    <button class="btn btn-primary" (click)="visible = true"><i class="icon-plus"></i> اضافه کردن تسک
+                    <button class="btn btn-primary" (click)="open(add_task)"><i class="icon-plus"></i> اضافه کردن تسک
                       جدید</button>
                   </span>
                 </div>
@@ -62,20 +62,7 @@
               </ul>
             </div>
             <div class="todo-list-footer">
-              <div class="new-task-wrapper" [ngClass]="{ visible: visible }">
-                <textarea class="textfield" name="todo" id="new-task" [(ngModel)]="text"
-                  [class.border-danger]="red_border"></textarea>
-                <span class="btn btn-danger cancel-btn" id="close-task-panel" (click)="visible = false">بستن</span>
-                <span class="btn btn-success ms-3 add-new-task-btn" id="add-task" (click)="
-                    addTask({
-                      text: text,
-                      Date: myDate,
-                      priority: 'Pending',
-                      badgeClass: 'badge-light-danger',
-                      completed: false
-                    })
-                  ">Add Task</span>
-              </div>
+             
             </div>
           </div>
         </div>
@@ -86,3 +73,27 @@
     </div>
   </div>
 </div>
+
+<ng-template #add_task let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" >افزودن وظیفه  </h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  
+  <div class="modal-body">
+  <div class="new-task-wrapper" >
+                <textarea class="textfield form-control mb-3" name="todo" rows="5" id="new-task" [(ngModel)]="text"
+                          [class.border-danger]="red_border"></textarea>
+    <span class="btn btn-danger cancel-btn" id="close-task-panel" (click)="modal.dismiss('Cancel click')">بستن</span>
+    <span class="btn btn-success ms-3 add-new-task-btn" id="add-task" (click)="
+                    addTask({
+                      text: text,
+                      Date: myDate,
+                      priority: 'Pending',
+                      badgeClass: 'badge-light-danger',
+                      completed: false
+                    })
+                  ">افزودن</span>
+  </div>
+  </div>
+</ng-template>
