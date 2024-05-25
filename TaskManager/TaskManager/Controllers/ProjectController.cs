@@ -2,19 +2,18 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using TaskManager.Models;
-using TaskManager.Models.DataBaseContext;
 using TaskManager.Models.Dto;
+using TaskManager.Models.Entity;
+using TaskManager.Services;
 
 namespace TaskManager.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/project")]
     [ApiController]
     public class ProjectController : ControllerBase
     {
-
         private readonly DataBaseContext _context;
-
-
+        
 
         public ProjectController(DataBaseContext context)
         {
@@ -22,16 +21,16 @@ namespace TaskManager.Controllers
         }
 
 
-
-
-
-
+        /// <summary>
+        /// ایجاد یک پروژه جدید
+        /// </summary>
+        /// <returns>پیام مناسب برای ایجاد شدن یا نشدن پروژه.</returns>
         [HttpPost("create")]
         public IActionResult Create(CreateProjectDto project)
         {
             dynamic result = new JObject();
 
-            var Project = new Project(project.Name,project.Description,project.StartTime,project.EndTime);
+            var Project = new Project(project.Name, project.Description, project.StartTime, project.EndTime);
             _context.Projects.Add(Project);
             _context.SaveChanges();
 
@@ -43,27 +42,77 @@ namespace TaskManager.Controllers
 
 
 
+        /// <summary>
+        /// ویرایش پروژه
+        /// </summary>
+        /// <returns>پیام مناسب برای ویرایش شدن یا نشدن پروژه.</returns>
+        [HttpPost("edit")]
+        public IActionResult Edit([FromBody] EditProjectDto project)
+        {
+            dynamic result = new JObject();
+            try
+            {
+                if (project == null)
+                {
+                    result.message = "پروژه ای وارد نکردید!";
+                    result.success = false;
+                    return BadRequest(result);
+                }
+
+                var existingProject = _context.Projects.Find(project.Id);
+                if (existingProject == null)
+                {
+                    result.message = "پروژه یافت نشد !";
+                    result.success = false;
+                    return BadRequest(result);
+                }
+
+                existingProject.Name = project.Name;
+                existingProject.Description = project.Description;
+                existingProject.StartTime = project.StartTime;
+                existingProject.EndTime = project.EndTime;
+
+
+                _context.SaveChanges();
+
+                result.message = "پروژه مورد نظر با موفقیت ویرایش شد";
+                result.success = true;
+
+                return Ok($"{existingProject} " +
+                    $"{result}");
+            }
+            catch
+            {
+                return BadRequest("خطایی رخ داده است!");
+            }
+        }
 
 
 
 
-        [HttpPost("delete/{id}")]
-        public IActionResult edit(int id) 
+        /// <summary>
+        /// فعال یا غیرفعال کردن یک پروژه.
+        /// </summary>
+        /// <param name="id">شناسه پروژه مورد نظر.</param>
+        /// <returns>پیام موفقیت آمیز یا پیام خطا در صورت وقوع مشکل.</returns>
+        [HttpPost("toggle-active/{id}")]
+        public async Task<IActionResult> ToggleActive(int id)
         {
             dynamic result = new JObject();
 
-            var existingProject = _context.Projects.Find(id);
-            if (existingProject == null)
+            var usprojecter = await _context.Projects.FindAsync(id);
+            if (usprojecter == null)
             {
-                result.message = " پروژه پیدا نشد ! ";
+                result.message = "پروزه ای یافت نشد !";
                 result.success = false;
                 return NotFound(result);
             }
 
-            _context.Projects.Remove(existingProject);
-            _context.SaveChanges();
+            usprojecter.IsActive = !usprojecter.IsActive;
 
-            result.message = "پروژه با موفقیت حذف شد";
+            await _context.SaveChangesAsync();
+
+            result.message = usprojecter.IsActive ? "پروژه فعال شد" : "پروژه غیرفعال شد";
             result.success = true;
 
             return Ok(result);
@@ -71,51 +120,12 @@ namespace TaskManager.Controllers
 
 
 
-
-
-
-        [HttpPost("edit")]
-        public IActionResult Edit([FromBody] EditProjectDto project)
-        {
-            dynamic result = new JObject();
-
-            if (project == null)
-            {
-                result.message = "پروژه ای وارد نکردید!";
-                result.success = false;
-                return BadRequest(result);
-            }
-
-            var existingProject = _context.Projects.Find(project.Id);
-            if (existingProject == null)
-            {
-                result.message = "پروژه یافت نشد !";
-                result.success = false;
-                return BadRequest(result);
-            }
-
-            // بروزرسانی خصوصیات کاربر
-            existingProject.Name = project.Name;
-            existingProject.Description = project.Description;
-            existingProject.StartTime = project.StartTime;
-            existingProject.EndTime = project.EndTime;
-            
-
-            _context.SaveChanges();
-
-            result.message = "پروژه مورد نظر با موفقیت ویرایش شد";
-            result.success = true;
-
-            return Ok($"{existingProject} " +
-                $"{result}");
-        }
-
-
-
-
-
-        [HttpGet("getallprojects")]
-        public IActionResult GetTasks()
+        /// <summary>
+        /// دیدن همه پروژه ها
+        /// </summary>
+        /// <returns>نمایش همه پروژه ها .</returns>
+        [HttpGet("get-all")]
+        public IActionResult GetProjects()
         {
             dynamic result = new JObject();
 
@@ -136,7 +146,7 @@ namespace TaskManager.Controllers
             }
             catch (Exception ex)
             {
-                result.message = "خطا در بازیابی وظایف: " + ex.Message;
+                result.message = "خطا در بازیابی پروژه: " + ex.Message;
                 result.success = false;
                 return BadRequest(result);
             }

@@ -1,46 +1,123 @@
-﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using TaskManager.Models;
-using TaskManager.Models.DataBaseContext;
 using TaskManager.Models.Dto;
+using TaskManager.Models.Entity;
+using TaskManager.Services;
 
 namespace TaskManager.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/user")]
     [ApiController]
     public class UserController : ControllerBase
     {
         private readonly DataBaseContext _context;
+        private readonly FileUpload _fileUpload;
 
-
-
-        public UserController(DataBaseContext context)
+        public UserController(FileUpload fileUpload, DataBaseContext context)
         {
+            _fileUpload = fileUpload;
             _context = context;
         }
 
-
-
-
-        [HttpPost("create")]
-        public IActionResult Create([FromForm] CreateUserDto model)
+        /// <summary>
+        /// دریافت لیستی از کاربران با صفحه‌بندی.
+        /// </summary>
+        /// <returns>لیست کاربران به همراه اطلاعات صفحه‌بندی.</returns>
+        [HttpPost("get-all")]
+        public async Task<IActionResult> GetAll([FromBody] PaginationParameters paginationParams)
         {
+            try
+            {
+                int skip = (paginationParams.CurrentPage - 1) * paginationParams.ItemsPerPage;
 
+                var usersQuery = _context.Users
+                    .Select(x => new UserViewModel
+                    {
+                        Id = x.Id,
+                        UserName = x.UserName,
+                        FirstName = x.FirstName,
+                        LastName = x.LastName,
+                        Password = x.Password,
+                        Avatar = x.Avatar,
+                        IsActive = x.IsActive
+                    });
+
+                var users = await usersQuery
+                    .Skip(skip)
+                    .Take(paginationParams.ItemsPerPage)
+                    .ToListAsync();
+
+                if (users.Count == 0)
+                {
+                    return NotFound("کاربری یافت نشد!");
+                }
+
+                var totalCount = await usersQuery.CountAsync();
+                var totalPages = (int)Math.Ceiling(totalCount / (double)paginationParams.ItemsPerPage);
+
+                var paginationHeader = new
+                {
+                    paginationParams.CurrentPage,
+                    paginationParams.ItemsPerPage,
+                    totalCount,
+                    totalPages
+                };
+
+                return Ok(new { users, paginationHeader });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "خطایی رخ داده است!");
+            }
+        }
+
+
+        /// <summary>
+        /// دریافت اطلاعات یک کاربر بر اساس شناسه.
+        /// </summary>
+        /// <param name="id">شناسه کاربر مورد نظر.</param>
+        /// <returns>اطلاعات کاربر یا پیام خطا در صورت عدم یافتن.</returns>
+        [HttpGet("get/{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
             dynamic result = new JObject();
 
-            if ( _context.Users.Any(x => x.UserName == model.UserName))
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                result.message = "کاربر مورد نظر یافت نشد";
+                result.success = false;
+                return NotFound(result);
+            }
+
+            return Ok(user);
+        }
+
+
+        /// <summary>
+        /// ایجاد یک کاربر جدید.
+        /// </summary>
+        /// <param name="model">اطلاعات مورد نیاز برای ایجاد کاربر.</param>
+        /// <returns>پیام موفقیت آمیز یا پیام خطا در صورت وقوع مشکل.</returns>
+        [HttpPost("create")]
+        public async Task<IActionResult> Create([FromForm] CreateUserDto model)
+        {
+            dynamic result = new JObject();
+
+            if (await _context.Users.AnyAsync(x => x.UserName == model.UserName))
             {
                 result.message = "نام کاربری وارد شده قبلا ثبت شده است .";
                 result.success = false;
                 return BadRequest(result);
             }
 
-            var user = new User(model.UserName, model.Email, model.Password);
+            var userAvatar = await _fileUpload.Upload(model.Avatar);
+            var user = new User(model.UserName, model.FirstName, model.LastName, model.Password, userAvatar);
 
-             _context.Users.Add(user);
-             _context.SaveChanges();
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
 
             result.message = "کاربر با موفقیت ایجاد شد";
             result.success = true;
@@ -49,23 +126,17 @@ namespace TaskManager.Controllers
         }
 
 
-
-
-
-
+        /// <summary>
+        /// به‌روزرسانی اطلاعات یک کاربر.
+        /// </summary>
+        /// <param name="model">اطلاعات جدید کاربر برای به‌روزرسانی.</param>
+        /// <returns>پیام موفقیت آمیز یا پیام خطا در صورت وقوع مشکل.</returns>
         [HttpPost("edit")]
-        public IActionResult Edit([FromBody] EditUserDto model)
+        public async Task<IActionResult> UpdateAsync([FromForm] EditUserDto model)
         {
             dynamic result = new JObject();
 
-            if (model == null)
-            {
-                result.message = "لطفا فیلدهارا بصورت صحیح وارد کنید!";
-                result.success = false;
-                return BadRequest(result);
-            }
-
-            var existingUser = _context.Users.Find(model.Id);
+            var existingUser = await _context.Users.FindAsync(model.Id);
             if (existingUser == null)
             {
                 result.message = "کاربری یافت نشد !";
@@ -73,68 +144,104 @@ namespace TaskManager.Controllers
                 return BadRequest(result);
             }
 
-            existingUser.UserName = model.UserName;
-            existingUser.Email = model.Email;
-            existingUser.FirstName = model.FirstName;
-            existingUser.LastName = model.LastName;
-            existingUser.PhoneNumber = model.PhoneNumber;
+            existingUser.FirstName = model.FirstName ?? existingUser.FirstName;
+            existingUser.LastName = model.LastName ?? existingUser.LastName;
 
-            _context.SaveChanges();
+            if (model.Avatar != null)
+            {
+                var newFileName = await _fileUpload.Upload(model.Avatar);
+
+                if (!string.IsNullOrEmpty(newFileName))
+                {
+                    if (!string.IsNullOrEmpty(existingUser.Avatar))
+                    {
+                        _fileUpload.Delete(existingUser.Avatar);
+                    }
+
+                    existingUser.Avatar = newFileName;
+                }
+                else
+                {
+                    result.message = "آپلود تصویر ناموفق بود !";
+                    result.success = false;
+                    return BadRequest(result);
+                }
+            }
+
+            await _context.SaveChangesAsync();
 
             result.message = "کاربر مورد نظر با موفقیت ویرایش شد";
-            result.success = true;
-            
-            return Ok($"{existingUser} " +
-                $"{result}");
-        }
-
-
-
-
-        [HttpPost("delete/{id}")]
-        public IActionResult Delete(int id)
-        {
-            dynamic result = new JObject();
-
-            var existingUser = _context.Users.Find(id);
-            if (existingUser == null)
-            {
-                result.message = "کاربری یافت نشد !";
-                result.success = false;
-                return NotFound(result);
-            }
-
-            _context.Users.Remove(existingUser);
-            _context.SaveChanges();
-
-            result.message = "کاربر مورد نظر با موفقیت حذف شد";
             result.success = true;
 
             return Ok(result);
         }
 
 
-
-
-        [HttpGet("usersgetall")]
-        public IActionResult GetTasks()
+        /// <summary>
+        /// تغییر رمز عبور کاربر.
+        /// </summary>
+        /// <param name="model.Id"></param>
+        /// <param name="model.OldPassword"></param>
+        /// <param name="model.NewPassword"></param>
+        /// <returns>پیام موفقیت آمیز یا پیام خطا در صورت وقوع مشکل.</returns>
+        [HttpPost("change-password")]
+        public async Task<IActionResult> ChangePassword([FromForm] ChangePassword model)
         {
             dynamic result = new JObject();
 
-            try
+            var user = await _context.Users.FindAsync(model.Id);
+
+            if (user == null)
             {
-                var Users = JArray.FromObject(_context.Users.ToList());
-                result.Users = Users;
-                result.success = true;
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                result.message = "خطا در بازیابی کارها: " + ex.Message;
+                result.message = "کاربری یافت نشد !";
                 result.success = false;
                 return BadRequest(result);
             }
+
+            if (model.OldPassword != user.Password)
+            {
+                result.message = "رمز عبور وارد شده با رمز عبور قبلی مطابقت ندارد !";
+                result.success = false;
+                return BadRequest(result);
+            }
+
+            user.ChangePassword(model.NewPassword);
+
+            await _context.SaveChangesAsync();
+
+            result.message = "پسورد کاربر مورد نظر با موفقیت ویرایش شد !";
+            result.success = true;
+
+            return Ok(result);
         }
 
+
+        /// <summary>
+        /// فعال یا غیرفعال کردن یک کاربر.
+        /// </summary>
+        /// <param name="id">شناسه کاربر مورد نظر.</param>
+        /// <returns>پیام موفقیت آمیز یا پیام خطا در صورت وقوع مشکل.</returns>
+        [HttpPost("toggle-active/{id}")]
+        public async Task<IActionResult> ToggleActive(int id)
+        {
+            dynamic result = new JObject();
+
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                result.message = "کاربری یافت نشد !";
+                result.success = false;
+                return NotFound(result);
+            }
+
+            user.IsActive = !user.IsActive;
+
+            await _context.SaveChangesAsync();
+
+            result.message = user.IsActive ? "کاربر فعال شد" : "کاربر غیرفعال شد";
+            result.success = true;
+
+            return Ok(result);
+        }
     }
 }
