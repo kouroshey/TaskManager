@@ -5,7 +5,7 @@ import {UsersService} from "../../../shared/services/users.service";
 import {UserPagination} from "../../../shared/model/user.pagination.model";
 import {NgbModal,ModalDismissReasons} from "@ng-bootstrap/ng-bootstrap";
 
-import { ApiService } from 'src/app/shared/services/api.service';
+
 
 
 @Component({
@@ -20,6 +20,7 @@ export class AllUsers implements OnInit {
     public currentPage:number;
     public itemsPerPage:number;
     public user:IUser;
+   
     
     constructor(
         private userService:UsersService,
@@ -34,26 +35,43 @@ export class AllUsers implements OnInit {
             var pageData : any = JSON.parse(localStorage.getItem("pagination"))
 
             if(pageData.type==="users")
-                this.showUsers(pageData.currentPage,pageData.itemsPerPage);
+               // this.showUsers(pageData.currentPage,pageData.itemsPerPage);
+                this.showFakeUSers()
             else
-                this.showUsers(1,10) 
+                //this.showUsers(1,10) 
+                this.showFakeUSers()
         }
         catch (e)
         {
-            this.showUsers(1,10)
+           
+           
 
         }
         
 
     }
     
+    
+    showFakeUSers()
+    {
+        this.userData={users:[{userName:'samal1',firstName:'علی',lastName:'علوی',email:'salam@ir',avatar:''}
+                ,{userName:'samal2',firstName:'علی',lastName:'علوی',email:'salam@ir',avatar:''}
+                ,{userName:'samal3',firstName:'علی',lastName:'علوی',email:'salam@ir',avatar:''}]
+            ,paginationHeader:{currentPage:2,totalPages:5,totalCount:120,itemsPerPage:10}}
+    }
    public showUsers(currentPage:number,itemsPerPage:number)
     {
-       this.currentPage=currentPage;
-       this.itemsPerPage=itemsPerPage;
-       localStorage.setItem("pagination",JSON.stringify({type:"users",currentPage:currentPage,itemsPerPage:itemsPerPage,search:''}))
-       this.userService.getAllUsers({itemsPerPage:this.itemsPerPage,currentPage:this.currentPage}).subscribe(res=>{this.userData=res})
+      try {
+          this.currentPage=currentPage;
+          this.itemsPerPage=itemsPerPage;
+          localStorage.setItem("pagination",JSON.stringify({type:"users",currentPage:currentPage,itemsPerPage:itemsPerPage,search:''}))
+          this.userService.getAllUsers({itemsPerPage:this.itemsPerPage,currentPage:this.currentPage}).subscribe(res=>{this.userData=res})
+
+      } 
+      catch (E)
+      {
         
+      }
     }
 
 
@@ -81,6 +99,9 @@ export class AllUsers implements OnInit {
         }
 
     }
+    
+    
+   
 
     
 
