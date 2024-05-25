@@ -13,39 +13,12 @@
         <app-feather-icons [icon]="'align-center'" class="status_toggle middle"></app-feather-icons>
       </div>
     </div>
-    <div class="left-header col-xxl-5 col-xl-6 col-lg-5 col-md-4 col-sm-3 p-0">
-      <app-swiper></app-swiper>
-    </div>
     <div class="nav-right col-xxl-7 col-xl-6 col-md-7 col-8 pull-right right-header p-0 ms-auto">
       <ul class="nav-menus">
-
-        <li>
-          <span class="header-search" (click)="searchToggle()">
-            <app-svg-icon [icon]="'search'"></app-svg-icon>
-          </span>
-        </li>
-
-        <li>
-          <div class="mode" (click)="layoutToggle()">
-            <svg>
-              <use href="assets/svg/icon-sprite.svg#moon"></use>
-            </svg>
-          </div>
-        </li>
-
-        <li class="onhover-dropdown">
-          <app-notification></app-notification>
-        </li>
         <li class="profile-nav onhover-dropdown p-0">
           <app-my-account></app-my-account>
         </li>
       </ul>
-    </div>
-    <div class="card-body">
-      <ol class="breadcrumb breadcrumb-colored m-b-20 bg-primary">
-        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-        <li class="breadcrumb-item active">Library</li>
-      </ol>
     </div>
   </div>
 </div>

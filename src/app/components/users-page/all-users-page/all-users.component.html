@@ -1,3 +1,4 @@
+<app-bread-crumbs></app-bread-crumbs>
 <div class="col-sm-12 mt-3">
     <div class="card ">
         <div class="card-body">
@@ -20,6 +21,7 @@
                             <img *ngIf="user.avatar && user.avatar !==''" [src]="'http://192.168.10.167/uploaded/images/'+user.avatar" alt="پروفایل">
                             <img *ngIf="!user.avatar && user.avatar ===''" src="assets/images/user.jpg"
                                 alt="پروفایل">
+
                         </th>
                         <td>{{user.firstName + ' ' + user.lastName}}</td>
                         <td>{{user.userName}}</td>
@@ -27,6 +29,7 @@
                         <td>
                             <button class="btn btn-primary" (click)="ShowUser(user.id,update)"><i class="fa fa-edit top-2 fs-13"></i></button>
                             <button class="btn btn-danger" (click)="deleteUser(user,delete)"><i class="fa fa-trash fs-13"></i></button>
+
                         </td>
                     </tr>
                 </tbody>
@@ -35,20 +38,29 @@
             <nav *ngIf="userData.paginationHeader.totalPages>1" aria-label="Page navigation example" class="w-100 d-flex justify-content-end my-4">
                 <ul class="pagination">
                     <li *ngIf="userData.paginationHeader.currentPage > 1 " class="page-item">
-                        <a class="page-link" href="javascript:;" (click)="showUsers(userData.paginationHeader.currentPage-1,itemsPerPage)"  aria-label="Previous">
+                        <a class="page-link" href="javascript:;"
+                            (click)="showUsers(userData.paginationHeader.currentPage-1,itemsPerPage)"
+                            aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
                     <li *ngIf="userData.paginationHeader.currentPage > 1" class="page-item">
-                        <a class="page-link" href="javascript:;" (click)="showUsers(userData.paginationHeader.currentPage-1,itemsPerPage)" >{{userData.paginationHeader.currentPage-1}}</a>
+                        <a class="page-link" href="javascript:;"
+                            (click)="showUsers(userData.paginationHeader.currentPage-1,itemsPerPage)">{{userData.paginationHeader.currentPage-1}}</a>
                     </li>
-                    <li  class="page-item">
-                        <a class="page-link disabled" disabled="" href="javascript:;" >{{userData.paginationHeader.currentPage}}</a>
+                    <li class="page-item">
+                        <a class="page-link disabled" disabled=""
+                            href="javascript:;">{{userData.paginationHeader.currentPage}}</a>
                     </li>
-                    <li *ngIf="userData.paginationHeader.currentPage<userData.paginationHeader.totalPages" class="page-item">
-                        <a class="page-link" (click)="showUsers(userData.paginationHeader.currentPage+1,itemsPerPage)" href="javascript:;">{{userData.paginationHeader.currentPage+1}}</a></li>
-                    <li *ngIf="userData.paginationHeader.currentPage<userData.paginationHeader.totalPages" class="page-item">
-                        <a class="page-link" href="javascript:;" (click)="showUsers(userData.paginationHeader.currentPage+1,itemsPerPage)"  aria-label="Next">
+                    <li *ngIf="userData.paginationHeader.currentPage<userData.paginationHeader.totalPages"
+                        class="page-item">
+                        <a class="page-link" (click)="showUsers(userData.paginationHeader.currentPage+1,itemsPerPage)"
+                            href="javascript:;">{{userData.paginationHeader.currentPage+1}}</a>
+                    </li>
+                    <li *ngIf="userData.paginationHeader.currentPage<userData.paginationHeader.totalPages"
+                        class="page-item">
+                        <a class="page-link" href="javascript:;"
+                            (click)="showUsers(userData.paginationHeader.currentPage+1,itemsPerPage)" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
@@ -59,7 +71,7 @@
 
 
     <ng-template #update let-modal>
-        
+
         <div class="modal-header">
             <h4 class="modal-title" id="modal-basic-title">مشاهده کاربر </h4>
             <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
@@ -83,7 +95,8 @@
                                 <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
                             </li>
                             <li>
-                                <a href="https://accounts.google.com/" target="_blank"><i class="fa fa-google-plus"></i></a>
+                                <a href="https://accounts.google.com/" target="_blank"><i
+                                        class="fa fa-google-plus"></i></a>
                             </li>
                             <li>
                                 <a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
@@ -113,30 +126,21 @@
                 </div>
             </div>
         </div>
-        
+
     </ng-template>
-    
+
     <ng-template #delete let-modal>
 
         <div class="modal-header">
-            <h4 class="modal-title" >حذف کاربر </h4>
+            <h4 class="modal-title">حذف کاربر </h4>
             <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
         </div>
-                    <form  method="post">
-                        <div class="modal-body">
-
+        <form method="post">
+            <div class="modal-body">
                             <div class="form-group">
                                 <label>آیا از حذف کاربر   <span id="productName" class="text-danger">{{user.firstName +' '+user.lastName}}</span> اطمینان دارید </label>
                                 <input type="hidden" name="product_id" id="productId">
                             </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-light ml-auto" (click)="modal.dismiss('cancel click')"  >انصراف</button>
-                            <button type="submit" class="btn btn-danger">بله حذف شود</button>
-                        </div>
-                    </form>
-           
     </ng-template>
-    
+
 </div>

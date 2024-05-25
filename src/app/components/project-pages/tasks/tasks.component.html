@@ -62,7 +62,7 @@
               </ul>
             </div>
             <div class="todo-list-footer">
-             
+
             </div>
           </div>
         </div>
@@ -76,11 +76,12 @@
 
 <ng-template #add_task let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" >افزودن وظیفه  </h4>
+    <h4 class="modal-title">افزودن وظیفه </h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
-  
+
   <div class="modal-body">
+<<<<<<< Anvari
   <div class="new-task-wrapper" >
                 <textarea class="textfield form-control mb-3" name="todo" rows="2" id="new-task" [(ngModel)]="text"
                           [class.border-danger]="red_border"></textarea>
@@ -94,6 +95,6 @@
                       completed: false
                     })
                   ">افزودن</span>
-  </div>
+    </div>
   </div>
 </ng-template>

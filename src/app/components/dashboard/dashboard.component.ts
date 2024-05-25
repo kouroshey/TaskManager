@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
+
+  tasks = [
+    'تسک اول',
+    'تسک دوم',
+    'تسک سوم',
+  ]
 }
