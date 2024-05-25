@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 const Months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 import * as data from "../../../shared/data/tasks";
+import {NgbModal,ModalDismissReasons} from "@ng-bootstrap/ng-bootstrap";
+
 
 export interface Task {
   text: string;
@@ -29,7 +31,7 @@ export class TasksComponent {
     badgeClass: "",
   };
 
-  constructor() { }
+  constructor(private modalService:NgbModal) { }
 
   ngOnInit() { }
 
@@ -38,6 +40,8 @@ export class TasksComponent {
       text: text,
     };
     this.todos.push(text);
+    this.text=''
+    this.modalService.dismissAll()
   }
 
   public taskCompleted(task: any) {
@@ -53,5 +57,30 @@ export class TasksComponent {
       task.completed = action;
     });
     this.completed = action;
+  }
+
+  closeResult = '';
+
+  open(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        },
+    );
+  }
+
+  private getDismissReason(reason: any): string {
+    switch (reason) {
+      case ModalDismissReasons.ESC:
+        return 'by pressing ESC';
+      case ModalDismissReasons.BACKDROP_CLICK:
+        return 'by clicking on a backdrop';
+      default:
+        return `with: ${reason}`;
+    }
+
   }
 }
