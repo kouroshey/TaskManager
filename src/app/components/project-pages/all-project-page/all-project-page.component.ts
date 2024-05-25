@@ -68,11 +68,11 @@ export class AllProjectPageComponent implements OnInit {
   //  this.ProjectList = 
   }
 
+
   chatDetailsGetter() {
 
   }
 
-  
 
   getProjects() { }
 

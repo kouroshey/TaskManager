@@ -18,7 +18,7 @@ ul {
 * a {
     color: var(--theme-deafult);
     text-decoration: none;
-    letter-spacing: 1px;
+    // letter-spacing: 1px;
 }
 
 a {
@@ -47,7 +47,7 @@ a {
 p {
     font-size: $paragraph-font-size;
     line-height: $paragraph-line-height;
-    letter-spacing: $paragraph-letter-spacing;
+    // letter-spacing: $paragraph-letter-spacing;
 }
 
 code {
