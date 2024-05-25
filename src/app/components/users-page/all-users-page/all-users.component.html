@@ -2,6 +2,7 @@
     <div class="card ">
         <div class="card-body">
             <button class="btn btn-success my-2" routerLink="/users/add">افزودن کاربر جدید</button>
+            <div class="recent-table table-responsive currency-table">
             <table class=" table table-hover">
                 <thead>
                     <tr>
@@ -16,7 +17,7 @@
                     <tr *ngFor="let user of userData.users">
                         <th scope="row">{{user.id}}</th>
                         <th scope="row">
-                            <img *ngIf="user.avatar && user.avatar !==''" [src]="user.id" alt="پروفایل">
+                            <img *ngIf="user.avatar && user.avatar !==''" [src]="'http://192.168.10.167/uploaded/images/'+user.avatar" alt="پروفایل">
                             <img *ngIf="!user.avatar && user.avatar ===''" src="assets/images/user.jpg"
                                 alt="پروفایل">
                         </th>
@@ -24,12 +25,13 @@
                         <td>{{user.userName}}</td>
                         <!-- options -->
                         <td>
-                            <button class="btn btn-primary" (click)="open(update)"><i class="fa fa-edit top-2 fs-13"></i></button>
-                            <button class="btn btn-danger" (click)="open(delete)"><i class="fa fa-trash fs-13"></i></button>
+                            <button class="btn btn-primary" (click)="ShowUser(user.id,update)"><i class="fa fa-edit top-2 fs-13"></i></button>
+                            <button class="btn btn-danger" (click)="deleteUser(user,delete)"><i class="fa fa-trash fs-13"></i></button>
                         </td>
                     </tr>
                 </tbody>
             </table>
+            </div>
             <nav *ngIf="userData.paginationHeader.totalPages>1" aria-label="Page navigation example" class="w-100 d-flex justify-content-end my-4">
                 <ul class="pagination">
                     <li *ngIf="userData.paginationHeader.currentPage > 1 " class="page-item">
@@ -74,8 +76,8 @@
                         </div>
                     </div>
                     <div class="social-details">
-                        <h5 class="mb-1"><a href="social-app.html">Brooklyn Simmons</a></h5>
-                        <span class="f-light">brookly.simmons</span>
+                        <h5 class="mb-1"><a href="social-app.html">{{user.firstName + ' '+user.lastName}}</a></h5>
+                        <span class="f-light">{{user.userName}}</span>
                         <ul class="card-social">
                             <li>
                                 <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
@@ -124,7 +126,7 @@
                         <div class="modal-body">
 
                             <div class="form-group">
-                                <label>آیا از حذف کاربر "  <span id="productName" class="text-danger"></span>"اطمینان دارید </label>
+                                <label>آیا از حذف کاربر   <span id="productName" class="text-danger">{{user.firstName +' '+user.lastName}}</span> اطمینان دارید </label>
                                 <input type="hidden" name="product_id" id="productId">
                             </div>
 

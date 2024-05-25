@@ -10,16 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AllProjectPageComponent implements OnInit {
 
-  constructor(private router: Router) {
-
-  }
-  ngOnInit(): void { }
-
-  chatDetailsGetter() {
-
-  }
-
-  public ProjectList = [
+  public ProjectList=[
     {
       id: 1,
       title: "عنوان پروژه",
@@ -68,11 +59,24 @@ export class AllProjectPageComponent implements OnInit {
       endDate: '20/11/1402',
       status: 'active'
     },
-  ]
+  ];
+  constructor(private router: Router) {
+
+  }
+  ngOnInit(): void {
+
+  //  this.ProjectList = 
+  }
+
+  chatDetailsGetter() {
+
+  }
+
+  
 
   getProjects() { }
 
-  onClick(projectId) {
+  Detail(projectId:number) {
     // request to api with projectId as params
     // if success then navigate to projects/chat/:projectId
     this.router.navigate([`projects/chat/${projectId}`])

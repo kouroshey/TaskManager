@@ -13,13 +13,30 @@ export class UsersService {
       private http: HttpClient
   ) { }
   
-  baseUrl="http://192.168.10.167";
+  baseUrl="https://task.mahdimazaheri.com";
 
   
   public getAllUsers(params: {}):Observable<UserPagination>{
     return this.http.post<UserPagination>(this.baseUrl+"/api/user/get-all",params,{headers: {
         'Authorization': `Bearer ${localStorage.getItem('Token')}`
       }})
+  }
+
+  public getUser(id:number):Observable<IUser>{
+    return this.http.get<IUser>(this.baseUrl+"/api/user/get/"+id,{headers: {
+      'Authorization': `Bearer ${localStorage.getItem('Token')}`
+    }})
+  }
+
+  public addUser(params:{}):Observable<any>{
+   try{
+    return this.http.post<any>(this.baseUrl+'/api/user/create',params,{headers: {
+      'Authorization': `Bearer ${localStorage.getItem('Token')}`
+    }})
+   }
+   catch (e){
+    console.log('error adduser',e)
+   }
   }
   
 

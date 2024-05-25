@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/shared/services/api.service';
+import { UsersService } from 'src/app/shared/services/users.service';
+import { Router } from '@angular/router';
+
 
 @Component({
     selector: 'app-add-user',
@@ -15,14 +18,17 @@ export class AddUser implements OnInit {
     file: File | null = null
     constructor(
         private fb: FormBuilder,
-        private api: ApiService
+        private api: ApiService,
+        private userService:UsersService,
+        private router: Router
     ) {
         this.addUserForm = this.fb.group({
-            name: ["", [Validators.required, Validators.minLength(4)]],
-            familyName: ["", [Validators.required, Validators.minLength(4)]],
-            password: ["", [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}$/),]],
+            firstName: ["", [Validators.required, Validators.minLength(4)]],
+            lastName: ["", [Validators.required, Validators.minLength(4)]],
+            password: ["", [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])$/),Validators.minLength(5)]],
             confirmPassword: ["", [Validators.required]],
             username: ["", [Validators.required, Validators.pattern(/^[a-z0-9]+.{4,}$/)]],
+            avatar:[null]
         }, {
             validators: this.passwordMatchValidator
         });
@@ -46,11 +52,17 @@ export class AddUser implements OnInit {
     onFileChange(event: any) {
         const file = event.target.files[0]
         if (file) {
-            this.showUpload = true
-            this.status = 'initial'
-            this.file = file
+            // this.showUpload = true
+            // this.status = 'initial'
+            // this.file = file
+            this.addUserForm.get('avatar').setValue(file)
         }
     }
+
+  
+
+   
+      
 
     onUpload() {
         if (this.file) {
@@ -71,6 +83,28 @@ export class AddUser implements OnInit {
                     return new Error(error);
                 },
             });
+        }
+    }
+
+
+    addUser(){
+        try{
+
+            const formData = new FormData();       
+            Object.keys(this.addUserForm.controls).forEach(formControlName => {  
+                formData.append(formControlName,  this.addUserForm.get(formControlName).value);    
+            }); 
+
+            console.log('user',formData)
+            this.userService.addUser(formData)
+            // this.router.navigate([`users/all`])
+
+        }
+        catch(e)
+        {
+
+            console.log('error in submit user',e)
+
         }
     }
 

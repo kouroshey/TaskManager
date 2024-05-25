@@ -1,25 +1,25 @@
 <div class="card add-user-page">
     <div class="card-body container-lg">
         <h4 class="mb-3">افزودن کاربر جدید</h4>
-        <form class="d-flex flex-column gap-3" [formGroup]="addUserForm">
+        <form class="d-flex flex-column gap-3" [formGroup]="addUserForm" (ngSubmit)="addUser()" enctype="multipart/form-data">
             <div class="row">
                 <div class="row">
                     <div class="col-4 mb-3">
                         <label for="name" class="form-label">نام</label>
-                        <input required formControlName="name" type="text" class="form-control" id="name" />
-                        <div *ngIf="addUserForm.controls.name.touched && addUserForm.controls.name.errors?.required"
+                        <input required formControlName="firstName" type="text" class="form-control" id="name" />
+                        <div *ngIf="addUserForm.controls.firstName.touched && addUserForm.controls.firstName.errors?.required"
                             class="text text-danger mt-1">وارد کردن نام الزامی است!</div>
-                        <div *ngIf="addUserForm.controls.name.touched && addUserForm.controls.name.errors?.minlength"
+                        <div *ngIf="addUserForm.controls.firstName.touched && addUserForm.controls.firstName.errors?.minlength"
                             class="text text-danger mt-1">نام باید حداقل 4 کاراکتر باشد!
                         </div>
                     </div>
                     <div class="col-4 mb-3">
                         <label for="familyName" class="form-label">نام خانوادگی</label>
-                        <input required formControlName="familyName" type="text" class="form-control" id="familyName" />
-                        <div *ngIf="addUserForm.controls.familyName.touched && addUserForm.controls.familyName.errors?.required"
+                        <input required formControlName="lastName" type="text" class="form-control" id="familyName" />
+                        <div *ngIf="addUserForm.controls.lastName.touched && addUserForm.controls.lastName.errors?.required"
                             class="text text-danger mt-1">وارد کردن نام خانوادگی الزامی است!
                         </div>
-                        <div *ngIf="addUserForm.controls.familyName.touched && addUserForm.controls.familyName.errors?.minlength"
+                        <div *ngIf="addUserForm.controls.lastName.touched && addUserForm.controls.lastName.errors?.minlength"
                             class="text text-danger mt-1">
                             نام خانوادگی باید حداقل 4 کاراکتر باشد!
                         </div>
@@ -46,10 +46,11 @@
                         </div>
                         <div *ngIf="addUserForm.controls.password.touched && addUserForm.controls.password.errors?.pattern"
                             class="text text-danger mt-1">
-                            پسورد باید فقط شامل کاراکتر های انگلیسی باشد <br />
-                            پسورد باید شامل اعداد باشد <br />
-                            پسورد باید شامل حروف بزرگ و کوچک باشد <br />
-                            پسورد باید حداقل ۴ کاراکتر باشد <br />
+                            پسورد باید شامل اعداد ، کاراکتر های انگلیسی و حروف کوچک و بزرگ باشد <br />
+                        </div>
+                        <div *ngIf="addUserForm.controls.password.touched && addUserForm.controls.password.errors?.minlength"
+                        class="text text-danger mt-1">
+                        پسورد باید حداقل ۴ کاراکتر باشد 
                         </div>
                     </div>
                     <div class="mb-3 col-4">
@@ -74,7 +75,7 @@
                         </div>
                         <div class="choose-photo-parent">
                             <label class="form-label" for="customFile">آپلود پروفایل جدید</label>
-                            <div *ngIf="status !== 'initial'" class="progress my-2">
+                            <!-- <div *ngIf="status !== 'initial'" class="progress my-2">
                                 <div *ngIf="status === 'uploading'"
                                     class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
                                     aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
@@ -86,12 +87,12 @@
                             </div>
                             <span *ngIf="status === 'fail'" class="text text-danger my-2">آپلود عکس موفقیت آمیز نبود.
                                 لطفا دوباره امتحان
-                                کنید</span>
+                                کنید</span> -->
                             <div class="choose-photo-input">
-                                <input (change)="onFileChange($event)" type="file" class="form-control" id="customFile">
+                                <input (change)="onFileChange($event)"  type="file" class="form-control" id="customFile">
                                 <span class="">انتخاب تصویر</span>
                             </div>
-                            <button *ngIf="file" (click)="onUpload()" class="btn btn-primary w-100 mt-2">آپلود</button>
+                            <!-- <button *ngIf="file" (click)="onUpload()" class="btn btn-primary w-100 mt-2">آپلود</button> -->
                         </div>
                     </div>
                     <div class="col-8 d-flex flex-column gap-2">
