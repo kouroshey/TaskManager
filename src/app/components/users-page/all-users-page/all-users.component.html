@@ -1,7 +1,7 @@
 <div class="col-sm-12 mt-3">
     <div class="card ">
         <div class="card-body">
-            <button class="btn btn-success my-2" >افزودن کاربر جدید</button>
+            <button class="btn btn-success my-2" routerLink="/users/add">افزودن کاربر جدید</button>
             <table class=" table table-hover">
                 <thead>
                     <tr>
@@ -24,8 +24,8 @@
                         <td>{{user.userName}}</td>
                         <!-- options -->
                         <td>
-                            <button class="btn btn-primary"><i class="fa fa-edit top-2 fs-13"></i></button>
-                            <button class="btn btn-danger"><i class="fa fa-trash fs-13"></i></button>
+                            <button class="btn btn-primary" (click)="open(update)"><i class="fa fa-edit top-2 fs-13"></i></button>
+                            <button class="btn btn-danger" (click)="open(delete)"><i class="fa fa-trash fs-13"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -56,60 +56,85 @@
     </div>
 
 
-    <ng-template #content let-modal>
+    <ng-template #update let-modal>
+        
         <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+            <h4 class="modal-title" id="modal-basic-title">مشاهده کاربر </h4>
             <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
         </div>
         <div class="modal-body">
-        <div class="p-3">
-            <div class="card user-card">
-                <div class="card-header">
-                    <h5>Profile</h5>
-                </div>
-                <div class="card-block">
-                    <div class="user-image">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="img-radius" alt="User-Profile-Image">
-                    </div>
-                    <h6 class="f-w-600 m-t-25 m-b-10">Alessa Robert</h6>
-                    <p class="text-muted">Active | Male | Born 23.05.1992</p>
-                    <hr>
-                    <p class="text-muted m-t-15">Activity Level: 87%</p>
-                    <ul class="list-unstyled activity-leval">
-                        <li class="active"></li>
-                        <li class="active"></li>
-                        <li class="active"></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                    <div class="bg-c-blue counter-block m-t-10 p-20">
-                        <div class="row">
-                            <div class="col-4">
-                                <i class="fa fa-comment"></i>
-                                <p>1256</p>
-                            </div>
-                            <div class="col-4">
-                                <i class="fa fa-user"></i>
-                                <p>8562</p>
-                            </div>
-                            <div class="col-4">
-                                <i class="fa fa-suitcase"></i>
-                                <p>189</p>
-                            </div>
+            <div class="card social-profile">
+                <div class="card-body">
+                    <div class="social-img-wrap">
+                        <div class="social-img"><img src="assets/images/dashboard-5/profile.png" alt="profile" /></div>
+                        <div class="edit-icon">
+                            <svg>
+                                <use href="assets/svg/icon-sprite.svg#profile-check"></use>
+                            </svg>
                         </div>
                     </div>
-                    <p class="m-t-15 text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <hr>
-                    <div class="row justify-content-center user-social-link">
-                        <div class="col-auto"><a href="#!"><i class="fa fa-facebook text-facebook"></i></a></div>
-                        <div class="col-auto"><a href="#!"><i class="fa fa-twitter text-twitter"></i></a></div>
-                        <div class="col-auto"><a href="#!"><i class="fa fa-dribbble text-dribbble"></i></a></div>
+                    <div class="social-details">
+                        <h5 class="mb-1"><a href="social-app.html">Brooklyn Simmons</a></h5>
+                        <span class="f-light">brookly.simmons</span>
+                        <ul class="card-social">
+                            <li>
+                                <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://accounts.google.com/" target="_blank"><i class="fa fa-google-plus"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://rss.app/" target="_blank"><i class="fa fa-rss"></i></a>
+                            </li>
+                        </ul>
+                        <ul class="social-follow">
+                            <li>
+                                <h5 class="mb-0">1,908</h5>
+                                <span class="f-light">Posts</span>
+                            </li>
+                            <li>
+                                <h5 class="mb-0">34.0k</h5>
+                                <span class="f-light">Followers</span>
+                            </li>
+                            <li>
+                                <h5 class="mb-0">897</h5>
+                                <span class="f-light">Following</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
         
+    </ng-template>
+    
+    <ng-template #delete let-modal>
+
+        <div class="modal-header">
+            <h4 class="modal-title" >حذف کاربر </h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+                    <form  method="post">
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <label>آیا از حذف کاربر "  <span id="productName" class="text-danger"></span>"اطمینان دارید </label>
+                                <input type="hidden" name="product_id" id="productId">
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light ml-auto" (click)="modal.dismiss('cancel click')"  >انصراف</button>
+                            <button type="submit" class="btn btn-danger">بله حذف شود</button>
+                        </div>
+                    </form>
+           
     </ng-template>
     
 </div>
