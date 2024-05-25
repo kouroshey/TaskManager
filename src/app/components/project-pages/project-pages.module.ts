@@ -26,8 +26,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
     NgPersianDatepickerModule,
     ReactiveFormsModule,
     FormsModule,
+    NgbModule,NgbDropdownModule
     NgbModule,
+    NgbDropdownModule,
     SharedModule
+
   ]
 })
 export class ProjectPagesModule { }

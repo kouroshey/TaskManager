@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
   styleUrl: './all-project-page.component.scss'
 })
 export class AllProjectPageComponent implements OnInit {
-  public ProjectList = [
+
+  public ProjectList=[
     {
       id: 1,
       title: "عنوان پروژه",
@@ -58,21 +59,24 @@ export class AllProjectPageComponent implements OnInit {
       endDate: '20/11/1402',
       status: 'active'
     },
-  ]
+  ];
   constructor(private router: Router) {
 
   }
-  ngOnInit(): void { }
+  ngOnInit(): void {
+
+  //  this.ProjectList = 
+  }
+
 
   chatDetailsGetter() {
 
   }
 
 
-
   getProjects() { }
 
-  onClick(projectId) {
+  Detail(projectId:number) {
     // request to api with projectId as params
     // if success then navigate to projects/chat/:projectId
     this.router.navigate([`projects/chat/${projectId}`])

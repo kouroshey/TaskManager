@@ -10,37 +10,53 @@
 
       </div>
 
+      <div *ngIf="ProjectList.length===0" class="error-wrapper" style="min-height: fit-content">
+        <div class="container"><img class="img-100" src="assets/images/other-images/sad.png" alt="">
+         
+          <div class="col-md-8 offset-md-2">
+            <p class="sub-content">دیتایی جهت نمایش وجود ندارد</p>
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div *ngFor="let proj of ProjectList" class="col-12 col-md-6 col-lg-3">
-          <div class="card project-card" (click)="onClick(proj.id)">
+          <div class="card project-card" >
             <div class="card-header px-4 pt-4">
+              <h5 class="card-title mb-0" (click)="Detail(proj.id)">{{proj.title}}</h5>
+              <div class="badge bg-success my-2">{{ proj.status }}</div>
               <div class="card-actions float-end">
                 <div ngbDropdown>
-                  <a ngbDropdownToggle href="javascript:;" class="float-left" data-toggle="dropdown"
-                    data-display="static">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                      class="feather feather-more-horizontal align-middle">
-                      <circle cx="12" cy="12" r="1"></circle>
-                      <circle cx="19" cy="12" r="1"></circle>
-                      <circle cx="5" cy="12" r="1"></circle>
-                    </svg>
-                  </a>
-
-                  <div ngbDropdownMenu class="text-md-right">
-                    <a ngbDropdownItem class="dropdown-item text-right" href="#" routerLink="/projects/edit">ویرایش</a>
-                    <a ngbDropdownItem class="dropdown-item" href="#">حذف</a>
-                  </div>
+                            <a ngbDropdownToggle href="javascript:;" class="float-left" data-toggle="dropdown"
+                              data-display="static">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="feather feather-more-horizontal align-middle">
+                                <circle cx="12" cy="12" r="1"></circle>
+                                <circle cx="19" cy="12" r="1"></circle>
+                                <circle cx="5" cy="12" r="1"></circle>
+                              </svg>
+                            </a>
+                            <div ngbDropdownMenu class="text-md-right">
+                                <a ngbDropdownItem class="dropdown-item " href="#" routerLink="/projects/edit">ویرایش</a>
+                                <a ngbDropdownItem class="dropdown-item" href="#">حذف</a>
+                            </div>
+                        </div>
                 </div>
               </div>
-              <h5 class="card-title mb-0">{{proj.title}}</h5>
-              <div class="badge bg-success my-2">{{ proj.status }}</div>
-
-              <!-- <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right">
-                <a ngbDropdownItem class="dropdown-item" href="#">Action</a>
-                <a ngbDropdownItem class="dropdown-item" href="#">Another action</a>
-                <a ngbDropdownItem class="dropdown-item" href="#">Something else here</a>
-              </div> -->
+           
+   
+            <div class="card-body px-4 pt-2">
+              <p>{{proj.description}}</p>
+              <div class="customers d-inline-block avatar-group">
+                <ul>
+                  <li class="d-inline-block"><img class="img-50 rounded-circle" src="assets/images/user/3.jpg" alt="" />
+                  </li>
+                  <li class="d-inline-block"><img class="img-50 rounded-circle" src="assets/images/user/5.jpg" alt="" />
+                  </li>
+                  <li class="d-inline-block"><img class="img-50 rounded-circle" src="assets/images/user/1.jpg" alt="" />
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
           <h5 class="card-title mb-0">{{proj.title}}</h5>

@@ -35,11 +35,11 @@ export class AllUsers implements OnInit {
             var pageData : any = JSON.parse(localStorage.getItem("pagination"))
 
             if(pageData.type==="users")
-               // this.showUsers(pageData.currentPage,pageData.itemsPerPage);
-                this.showFakeUSers()
+               this.showUsers(pageData.currentPage,pageData.itemsPerPage);
+                // this.showFakeUSers()
             else
-                //this.showUsers(1,10) 
-                this.showFakeUSers()
+                this.showUsers(1,10) 
+                // this.showFakeUSers()
         }
         catch (e)
         {
@@ -72,6 +72,18 @@ export class AllUsers implements OnInit {
       {
         
       }
+    }
+
+    public ShowUser(id:number,content)
+    {
+        this.userService.getUser(id).subscribe(res=>this.user=res)
+        this.open(content)
+    }
+
+
+    public deleteUser(user,content){
+        this.user=user;
+        this.open(content)
     }
 
 
