@@ -1,17 +1,24 @@
 {
   "format": 1,
   "restore": {
+
     "C:\\Users\\hp\\Desktop\\work\\Raysaz\\task-manager\\TaskManager\\TaskManager\\TaskManager.csproj": {}
+
+
   },
   "projects": {
-    "C:\\Users\\hp\\Desktop\\work\\Raysaz\\task-manager\\TaskManager\\TaskManager\\TaskManager.csproj": {
+    "C:\\Users\\hp\\Desktop\\work\\Raysaz\\main-task-managr\\TaskManager\\TaskManager\\TaskManager\\TaskManager.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hp\\Desktop\\work\\Raysaz\\task-manager\\TaskManager\\TaskManager\\TaskManager.csproj",
+        "projectUniqueName": "C:\\Users\\hp\\Desktop\\work\\Raysaz\\main-task-managr\\TaskManager\\TaskManager\\TaskManager\\TaskManager.csproj",
         "projectName": "TaskManager",
-        "projectPath": "C:\\Users\\hp\\Desktop\\work\\Raysaz\\task-manager\\TaskManager\\TaskManager\\TaskManager.csproj",
+        "projectPath": "C:\\Users\\hp\\Desktop\\work\\Raysaz\\main-task-managr\\TaskManager\\TaskManager\\TaskManager\\TaskManager.csproj",
         "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
+
         "outputPath": "C:\\Users\\hp\\Desktop\\work\\Raysaz\\task-manager\\TaskManager\\TaskManager\\obj\\",
+
+        "outputPath": "C:\\Users\\hp\\Desktop\\work\\Raysaz\\main-task-managr\\TaskManager\\TaskManager\\TaskManager\\obj\\",
+
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -32,6 +39,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {

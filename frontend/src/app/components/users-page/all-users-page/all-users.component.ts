@@ -1,16 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+
 import {IUser} from "../../../shared/model/user.model"
 import {UsersService} from "../../../shared/services/users.service";
 import {UserPagination} from "../../../shared/model/user.pagination.model";
 import {NgbModal,ModalDismissReasons} from "@ng-bootstrap/ng-bootstrap";
+
+import { ApiService } from 'src/app/shared/services/api.service';
+
 
 @Component({
     selector: 'app-all-users',
     templateUrl: 'all-users.component.html',
     styleUrl: 'all-users.component.scss'
 })
-
 export class AllUsers implements OnInit {
+
   
     public userData:UserPagination;
     public currentPage:number;
@@ -75,5 +79,10 @@ export class AllUsers implements OnInit {
             default:
                 return `with: ${reason}`;
         }
+
     }
+
+    
+
+   
 }

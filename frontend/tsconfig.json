@@ -28,6 +28,11 @@
   "importHelpers": true,
   "emitDecoratorMetadata": true,
   "experimentalDecorators": true,
-  "useDefineForClassFields": false
+  "useDefineForClassFields": false,
+  "paths": {
+    "jalali-ts": [
+        "./node_modules/jalali-ts/dist/index.d.ts"
+    ]
+}
 }
 }

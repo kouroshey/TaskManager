@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.getCaptcha()
     this.activatedRout.data.subscribe(
       (response: any) => {
         this.captchImg = `data:image/jpg;base64,${response.image}`
@@ -53,21 +52,18 @@ export class LoginComponent implements OnInit {
     let loginDetails = {
       username: params.value.username,
       password: params.value.password,
-      captchaCode: params.value.captcha,
-      captchaHashKey: this.captchaHashKey,
-      rememberMe: this.rememberMe
     }
 
     this.authService.login(loginDetails).subscribe((response: any) => {
       if (response?.success) {
         localStorage.setItem('Token', response.accessToken)
         this.router.navigate(['/'])
-        this.toastr.success('شما با موفقیت وارد شدید!');
+        this.toastr.success(response.message);
         this.accessToken = response.Token
       } else {
         console.log(response.message);
         this.error.isError = true
-        this.error.errorMessage = response?.message
+        this.error.errorMessage = response.message
       }
     })
   }
