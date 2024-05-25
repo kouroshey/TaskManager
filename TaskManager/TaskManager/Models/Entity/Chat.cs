@@ -11,9 +11,11 @@
         public int ProjectId { get; set; }
         public Project Project { get; set; }
 
-        public Chat(string text)
+        public Chat(string text, int userID, int projectId)
         {
             Text = text;
+            UserID = userID;
+            ProjectId = projectId;
         }
     }
 }

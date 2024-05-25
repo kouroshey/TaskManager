@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\AshkaN\\Desktop\\taskmanager\\TaskManager\\TaskManager\\TaskManager\\TaskManager.csproj": {}
+    "C:\\Users\\hp\\Desktop\\work\\Raysaz\\main-task-managr\\TaskManager\\TaskManager\\TaskManager\\TaskManager.csproj": {}
   },
   "projects": {
-    "C:\\Users\\AshkaN\\Desktop\\taskmanager\\TaskManager\\TaskManager\\TaskManager\\TaskManager.csproj": {
+    "C:\\Users\\hp\\Desktop\\work\\Raysaz\\main-task-managr\\TaskManager\\TaskManager\\TaskManager\\TaskManager.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\AshkaN\\Desktop\\taskmanager\\TaskManager\\TaskManager\\TaskManager\\TaskManager.csproj",
+        "projectUniqueName": "C:\\Users\\hp\\Desktop\\work\\Raysaz\\main-task-managr\\TaskManager\\TaskManager\\TaskManager\\TaskManager.csproj",
         "projectName": "TaskManager",
-        "projectPath": "C:\\Users\\AshkaN\\Desktop\\taskmanager\\TaskManager\\TaskManager\\TaskManager\\TaskManager.csproj",
-        "packagesPath": "C:\\Users\\AshkaN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\AshkaN\\Desktop\\taskmanager\\TaskManager\\TaskManager\\TaskManager\\obj\\",
+        "projectPath": "C:\\Users\\hp\\Desktop\\work\\Raysaz\\main-task-managr\\TaskManager\\TaskManager\\TaskManager\\TaskManager.csproj",
+        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\hp\\Desktop\\work\\Raysaz\\main-task-managr\\TaskManager\\TaskManager\\TaskManager\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\AshkaN\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -34,11 +32,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         },
         "restoreAuditProperties": {
           "enableAudit": "true",
@@ -78,6 +71,10 @@
               "target": "Package",
               "version": "[8.0.5, )"
             },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
@@ -106,7 +103,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
