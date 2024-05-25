@@ -28,6 +28,15 @@
                     </svg>
                   </a>
 
+                            <div ngbDropdownMenu class="text-md-right">
+                                <a ngbDropdownItem class="dropdown-item text-right" href="#" routerLink="/projects/edit">ویرایش</a>
+                                <a ngbDropdownItem class="dropdown-item" href="#">حذف</a>
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="card-title mb-0">{{proj.title}}</h5>
+                    <div class="badge bg-success my-2">{{ proj.status }}</div>
+
                   <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right">
                     <a ngbDropdownItem class="dropdown-item" href="#">Action</a>
                     <a ngbDropdownItem class="dropdown-item" href="#">Another action</a>
@@ -37,7 +46,7 @@
               </div>
               <h5 class="card-title mb-0">{{proj.title}}</h5>
               <div class="badge bg-success my-2">{{ proj.status }}</div>
-            </div>
+   
             <div class="card-body px-4 pt-2">
               <p>{{proj.description}}</p>
               <div class="customers d-inline-block avatar-group">
@@ -64,8 +73,7 @@
           </div>
         </div>
 
-      </div>
-    </div>
+
 
     <nav aria-label="Page navigation example" class="w-100 d-flex justify-content-end my-4">
       <ul class="pagination">

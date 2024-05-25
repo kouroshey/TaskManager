@@ -53,6 +53,10 @@ import { ResponseInterceptor } from './shared/interceptors/response.interceptor'
     LoadingBarRouterModule,
     //     // for Core use:
     LoadingBarModule,
+
+    ProjectPagesModule
+
+
   ],
   bootstrap: [AppComponent],
   providers: [

@@ -5,6 +5,9 @@ import { EditProjectPageComponent } from './edit-project-page/edit-project-page.
 import { AllProjectPageComponent } from './all-project-page/all-project-page.component';
 import { ProjectPageRoutingModule } from './project-pages-routing.module'
 import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
+
+import {NgbDropdownModule} from "@ng-bootstrap/ng-bootstrap";
+
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ChatComponent } from './chat/chat.component';
 import { TasksComponent } from './tasks/tasks.component';
@@ -13,7 +16,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
+
 @NgModule({
+
   declarations: [AddProjectPageComponent, EditProjectPageComponent, AllProjectPageComponent, ChatComponent, TasksComponent, ConversationComponent],
   imports: [CommonModule,
     ProjectPageRoutingModule,
@@ -21,6 +26,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     FormsModule,
     NgbModule
+
   ]
 })
 export class ProjectPagesModule { }

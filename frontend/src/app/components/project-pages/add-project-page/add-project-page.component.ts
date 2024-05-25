@@ -27,7 +27,7 @@ export class AddProjectPageComponent implements OnInit {
       endDate:["",Validators.required]
 
     },{
-      Validators:this.DateValidator
+      validators:this.DateValidator
     })
   }
   
@@ -35,7 +35,6 @@ export class AddProjectPageComponent implements OnInit {
 
   DateValidator(form:FormGroup):{ [key: string]: any } | null{
 
-    console.log('start')
     const start=form.get('startDate').value;
     const end=form.get('endDate').value;
     

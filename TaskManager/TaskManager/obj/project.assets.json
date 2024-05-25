@@ -8195,11 +8195,24 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+
+      "projectUniqueName": "C:\\Users\\hp\\Desktop\\work\\Raysaz\\task-manager\\TaskManager\\TaskManager\\TaskManager.csproj",
+
       "projectUniqueName": "C:\\Users\\hp\\Desktop\\work\\Raysaz\\main-task-managr\\TaskManager\\TaskManager\\TaskManager\\TaskManager.csproj",
+
       "projectName": "TaskManager",
       "projectPath": "C:\\Users\\hp\\Desktop\\work\\Raysaz\\main-task-managr\\TaskManager\\TaskManager\\TaskManager\\TaskManager.csproj",
       "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
+
+      "outputPath": "C:\\Users\\hp\\Desktop\\work\\Raysaz\\task-manager\\TaskManager\\TaskManager\\obj\\",
+      "projectUniqueName": "C:\\Users\\AshkaN\\Desktop\\taskmanager\\TaskManager\\TaskManager\\TaskManager\\TaskManager.csproj",
+      "projectName": "TaskManager",
+      "projectPath": "C:\\Users\\AshkaN\\Desktop\\taskmanager\\TaskManager\\TaskManager\\TaskManager\\TaskManager.csproj",
+      "packagesPath": "C:\\Users\\AshkaN\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\AshkaN\\Desktop\\taskmanager\\TaskManager\\TaskManager\\TaskManager\\obj\\",
+
       "outputPath": "C:\\Users\\hp\\Desktop\\work\\Raysaz\\main-task-managr\\TaskManager\\TaskManager\\TaskManager\\obj\\",
+
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config"

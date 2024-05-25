@@ -13,11 +13,14 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TaskManager")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< HEAD
+
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8be4ae423e70485456aa4bad225bec73c9c46f72")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+80ae1ed51b93638087ee8a95b7ccfaa565ae4b75")]
+
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+599362a182dc1f4098dbafd875944cd2694045a6")]
-=======
+
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6f98f53aef03bbcdcfb9155e8d815a3200d863c4")]
->>>>>>> Kourosh
+
 [assembly: System.Reflection.AssemblyProductAttribute("TaskManager")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TaskManager")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
