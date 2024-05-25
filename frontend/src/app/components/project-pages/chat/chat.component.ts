@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgbNavChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-chat',
@@ -6,26 +7,23 @@ import { Component } from '@angular/core';
   styleUrl: './chat.component.scss'
 })
 export class ChatComponent {
-  activeTab: 1 | 2 = 1;
-  navItems = [
-    {
-      id: 1,
-      title: 'گفتگو',
-    },
-    {
-      id: 2,
-      title: 'وظایف',
-    },
-  ]
+  public active1 = 1;
+  public active2 = 1;
+  public active3 = 1;
+  disabled = true;
+
+  onNavChange1(changeEvent: NgbNavChangeEvent) {
+    if (changeEvent.nextId === 3) {
+      changeEvent.preventDefault();
+    }
+  }
+
+  onNavChange(changeEvent: NgbNavChangeEvent) {
+    if (changeEvent.nextId === 3) {
+      changeEvent.preventDefault();
+    }
+  }
 
   constructor() { }
 
-  onNavClick(newItem: number) {
-
-    if (this.activeTab === 1) {
-      this.activeTab = 2
-    } else {
-      this.activeTab = 1
-    }
-  }
 }

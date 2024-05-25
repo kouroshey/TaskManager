@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ChatComponent } from './chat/chat.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { ConversationComponent } from './conversation/conversation.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -18,7 +19,8 @@ import { ConversationComponent } from './conversation/conversation.component';
     ProjectPageRoutingModule,
     NgPersianDatepickerModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ]
 })
 export class ProjectPagesModule { }

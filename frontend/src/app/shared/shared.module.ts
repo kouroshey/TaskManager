@@ -4,7 +4,6 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 // Components
-import { BreadcrumbComponent } from "./components/breadcrumb/breadcrumb.component";
 import { FeatherIconsComponent } from "./components/feather-icons/feather-icons.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { HeaderComponent } from "./components/header/header.component";
@@ -34,7 +33,6 @@ import { DashboardComponent } from "../components/dashboard/dashboard.component"
     FooterComponent,
     SidebarComponent,
     ContentComponent,
-    BreadcrumbComponent,
     FeatherIconsComponent,
     FullComponent,
     LoaderComponent,
@@ -49,6 +47,6 @@ import { DashboardComponent } from "../components/dashboard/dashboard.component"
   ],
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, NgbModule, SwiperModule],
   providers: [NavService, LayoutService, DecimalPipe],
-  exports: [NgbModule, FormsModule, ReactiveFormsModule, LoaderComponent, BreadcrumbComponent, FeatherIconsComponent, TapToTopComponent, SvgIconComponent, SwiperModule],
+  exports: [NgbModule, FormsModule, ReactiveFormsModule, LoaderComponent, FeatherIconsComponent, TapToTopComponent, SvgIconComponent, SwiperModule],
 })
 export class SharedModule { }

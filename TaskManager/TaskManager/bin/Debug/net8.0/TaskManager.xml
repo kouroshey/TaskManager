@@ -23,6 +23,55 @@
             <response code="200">اگر توکن معتبر باشد، اطلاعات کاربر بازگردانده می‌شود.</response>
             <response code="404">اگر توکن معتبر نباشد، پیام خطا بازگردانده می‌شود.</response>
         </member>
+        <member name="M:TaskManager.Controllers.ProjectController.Create(TaskManager.Models.Dto.CreateProjectDto)">
+            <summary>
+            ایجاد یک پروژه جدید
+            </summary>
+            <returns>پیام مناسب برای ایجاد شدن یا نشدن پروژه.</returns>
+        </member>
+        <member name="M:TaskManager.Controllers.ProjectController.Edit(TaskManager.Models.Dto.EditProjectDto)">
+            <summary>
+            ویرایش پروژه
+            </summary>
+            <returns>پیام مناسب برای ویرایش شدن یا نشدن پروژه.</returns>
+        </member>
+        <member name="M:TaskManager.Controllers.ProjectController.ToggleActive(System.Int32)">
+            <summary>
+            فعال یا غیرفعال کردن یک پروژه.
+            </summary>
+            <param name="id">شناسه پروژه مورد نظر.</param>
+            <returns>پیام موفقیت آمیز یا پیام خطا در صورت وقوع مشکل.</returns>
+        </member>
+        <member name="M:TaskManager.Controllers.ProjectController.GetProjects">
+            <summary>
+            دیدن همه پروژه ها
+            </summary>
+            <returns>نمایش همه پروژه ها .</returns>
+        </member>
+        <member name="M:TaskManager.Controllers.TaskController.Create(TaskManager.Models.Dto.CreateTaskDto)">
+            <summary>
+            ایجاد یک وظیفه جدید
+            </summary>
+            <returns>پیام مناسب برای ایجاد شدن یا نشدن وظیفه.</returns>
+        </member>
+        <member name="M:TaskManager.Controllers.TaskController.GetTasks">
+            <summary>
+            نمایش تمام وظیفه ها
+            </summary>
+            <returns>نمایش تمام وظیفه ها یا پیام مناسب در صورت خطا.</returns>
+        </member>
+        <member name="M:TaskManager.Controllers.TaskController.Edit(TaskManager.Models.Dto.EditTaskDto)">
+            <summary>
+            ویرایش وظیفه
+            </summary>
+            <returns>پیام مناسب برای ویرایش وظیفه یا خطا در صورت داشتن خطا</returns>
+        </member>
+        <member name="M:TaskManager.Controllers.TaskController.delete(System.Int32)">
+            <summary>
+            حذف وظیفه
+            </summary>
+            <returns>پیام مناسب برای حذف وظیفه یا خطا در صورت داشتن خطا</returns>
+        </member>
         <member name="M:TaskManager.Controllers.UserController.GetAll(TaskManager.Models.Dto.PaginationParameters)">
             <summary>
             دریافت لیستی از کاربران با صفحه‌بندی.
@@ -93,6 +142,126 @@
             گذرواژه جدید
              </summary> 
         </member>
+        <member name="P:TaskManager.Models.Dto.CreateChatDto.Text">
+            <summary>
+            متن پیام
+            </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.CreateCommentDto.Title">
+             <summary>
+            عنوان نظر
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.CreateCommentDto.Text">
+             <summary>
+            متن نظر
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.CreateProjectDto.Name">
+             <summary>
+            نام پروژه
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.CreateProjectDto.Description">
+             <summary>
+            توضیحات پروژه
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.CreateProjectDto.StartTime">
+             <summary>
+            زمان شروع پروژه
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.CreateProjectDto.EndTime">
+             <summary>
+            زمان پایان پروژه
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.CreateTaskDto.Name">
+            <summary>
+            نام وظیفه
+            </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.CreateTaskDto.Description">
+             <summary>
+            توضیحات وظیفه
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.CreateTaskDto.ExpireTaskTime">
+             <summary>
+            مهلت زمان وظیفه
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.CreateTaskDto.PrioritySet">
+             <summary>
+            سطح اهمیت وظیفه
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.EditChatDto.Text">
+             <summary>
+            متن پیام
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.EditChatDto.CreatedAt">
+             <summary>
+            تاریخ پیام ارسال شده
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.EditCommentDto.Title">
+             <summary>
+            عنوان نظر
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.EditCommentDto.Text">
+             <summary>
+            متن نظر
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.EditCommentDto.CreatedAt">
+             <summary>
+            زمان ایجاد نظر
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.EditProjectDto.Name">
+             <summary>
+            نام پروژه
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.EditProjectDto.Description">
+             <summary>
+            توضیحات پروژه
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.EditProjectDto.StartTime">
+             <summary>
+            زمان شروع پروژه
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.EditProjectDto.EndTime">
+             <summary>
+            زمان پایان پروژه
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.EditTaskDto.Name">
+             <summary>
+            نام وظیفه
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.EditTaskDto.Description">
+             <summary>
+            توضیحات وظیفه
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.EditTaskDto.ExpireTaskTime">
+             <summary>
+            مهلت زمان وظیفه
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.EditTaskDto.PrioritySet">
+             <summary>
+            سطح اهمیت وظیفه
+             </summary> 
+        </member>
         <member name="P:TaskManager.Models.Dto.PaginationParameters.CurrentPage">
             <example>
             1
@@ -102,6 +271,46 @@
             <example>
             10
             </example>
+        </member>
+        <member name="P:TaskManager.Models.Dto.GetAllProjectsDto.Name">
+             <summary>
+            نام پروژه
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.GetAllProjectsDto.Description">
+             <summary>
+            توضیحات پروژه
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.GetAllProjectsDto.StartTime">
+             <summary>
+            زمان شروع پروژه
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.GetAllProjectsDto.EndTime">
+             <summary>
+            زمان پایان پروژه
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.TaskViewMode.Name">
+             <summary>
+            نام وظیفه
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.TaskViewMode.Description">
+             <summary>
+            توضیحات وظیفه
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.TaskViewMode.ExpireTaskTime">
+             <summary>
+            مهلت وظیفه
+             </summary> 
+        </member>
+        <member name="P:TaskManager.Models.Dto.TaskViewMode.PrioritySet">
+             <summary>
+            سطح اهمیت وظیفه
+             </summary> 
         </member>
     </members>
 </doc>
