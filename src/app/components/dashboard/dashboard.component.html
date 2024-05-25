@@ -1,70 +1,75 @@
 <app-bread-crumbs></app-bread-crumbs>
-<div class="card">
-  <div class="card-body">
-    <div class="dashboard row h-100 p-5">
-      <div class="col-10 h-100 card">
-        <div class="card-body">
-          <div class="row">
-            <div class="title row">میز کار کوروش عیدی وندی</div>
-            <div class="row desktop-top gap-4 mt-4 ">
-              <div class="card col-2 shadow-sm p-0">
-                <div class="card-body">
-                  <app-svg-icon icon="user" class="text-center"></app-svg-icon>
-                  <p>کار های امروز من</p>
-                  <span>1</span>
-                </div>
-              </div>
-              <div class="card col-2 shadow-sm p-0">
-                <div class="card-body">
-                  <app-svg-icon icon="bookmark" class="text-center"></app-svg-icon>
-                  <p>کار های دارای تاخیر</p>
-                  <span>1</span>
-                </div>
-              </div>
-              <div class="card col-2 shadow-sm p-0">
-                <div class="card-body">
-                  <app-svg-icon icon="search" class="text-center"></app-svg-icon>
-                  <p>کار های قابل پیگیری</p>
-                  <span>1</span>
-                </div>
-              </div>
-            </div>
-            <div class="row teammate d-flex gap-1 flex-row align-items-center">
-              <span class="">همکاران من:</span>
-              <div class="customers d-inline-block avatar-group">
-                <ul>
-                  <li class="d-inline-block"><img class="img-50 rounded-circle" src="assets/images/user/3.jpg" alt="" />
-                  </li>
-                  <li class="d-inline-block"><img class="img-50 rounded-circle" src="assets/images/user/5.jpg" alt="" />
-                  </li>
-                  <li class="d-inline-block"><img class="img-50 rounded-circle" src="assets/images/user/1.jpg" alt="" />
-                  </li>
-                </ul>
-              </div>
+<div class="dashboard h-100 d-flex gap-3 flex-column flex-lg-row">
+  <div class="h-100 d-flex flex-column align-items-center card">
+    <div class="card-body">
+      <img class="rounded-5 user-photo" src="assets/images/default-avatar.png" alt="تصویر پیشفرض">
+      <div class="user-details d-flex flex-column align-items-center mt-2">
+        <span>کوروش عیدی وندی</span>
+        <span>دوشنبه 31 اردیبهشت</span>
+        <button class="btn btn-primary" routerLink="/users/profile"> ویرایش پروفایل</button>
+      </div>
+    </div>
+  </div>
+  <div class="h-100 card flex-grow-1">
+    <div class="card-body">
+      <div class="row">
+        <div class="title row">میز کار کوروش عیدی وندی</div>
+        <div class="row desktop-top gap-4 mt-4 ">
+          <div class="taks-card card col-md-4 col-xl-3 col-xxl-2 p-0">
+            <div class="card-body">
+              <app-svg-icon icon="user" class="text-center"></app-svg-icon>
+              <p>کار های امروز من</p>
+              <span>1</span>
             </div>
           </div>
-          <div class="row">
-            <div class="col-6 h-100 rounded-2 p-0">
-              <div class="rounded-2 w-100 dashboard-bottom-box text-center">
-                <p class="text-center w-100 rounded-top-2 bg-success">پیگیری از دیگران</p>
-                <span>در حال حاضر هیچ تسکی ندارید!</span>
-              </div>
+          <div class="taks-card card col-md-4 col-xl-3 col-xxl-2 p-0">
+            <div class="card-body">
+              <app-svg-icon icon="bookmark" class="text-center"></app-svg-icon>
+              <p>کار های دارای تاخیر</p>
+              <span>1</span>
             </div>
-            <div class="col-6 h-100 rounded-2 p-0">
-              <div class="rounded-2 w-100 dashboard-bottom-box text-center">
-                <p class="text-center w-100 rounded-top-2 bg-danger">پیگیری از دیگران</p>
-                <span>در حال حاضر هیچ تسکی ندارید!</span>
+          </div>
+          <div class="taks-card card col-md-4 col-xl-3 col-xxl-2 p-0">
+            <div class="card-body">
+              <app-svg-icon icon="search" class="text-center"></app-svg-icon>
+              <p>کار های قابل پیگیری</p>
+              <span>1</span>
+            </div>
+          </div>
+        </div>
+        <div class="row teammate d-flex gap-1 flex-row align-items-center">
+          <span class="">همکاران من:</span>
+          <div class="customers d-inline-block avatar-group">
+            <ul>
+              <li class="d-inline-block"><img class="img-50 rounded-circle" src="assets/images/user/3.jpg" alt="" />
+              </li>
+              <li class="d-inline-block"><img class="img-50 rounded-circle" src="assets/images/user/5.jpg" alt="" />
+              </li>
+              <li class="d-inline-block"><img class="img-50 rounded-circle" src="assets/images/user/1.jpg" alt="" />
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex gap-3 py-4">
+        <div class="h-100 rounded-2 flex-grow-1 p-0">
+          <div class="rounded-2 w-100 dashboard-bottom-box text-center">
+            <p class="text-center w-100 rounded-top-2 bg-secondary py-2">کارهای من</p>
+            <span *ngIf="!tasks">در حال حاضر هیچ تسکی ندارید!</span>
+            <div *ngIf="tasks">
+              <div class="d-flex" *ngFor="let item of tasks">
+                <div class="form-check checkbox mb-0">
+                  <input class="form-check-input" id="checkbox3" type="checkbox" checked="" />
+                  <label class="form-check-label" for="checkbox3">{{item}}</label>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-2 h-100 d-flex flex-column align-items-center card">
-        <div class="card-body">
-          <img class="rounded-5 user-photo" src="assets/images/default-avatar.png" alt="تصویر پیشفرض">
-          <div class="user-details d-flex flex-column align-items-center mt-2">
-            <span>کوروش عیدی وندی</span>
-            <span>دوشنبه 31 اردیبهشت</span>
+        <div class="h-100 rounded-2 flex-grow-1 p-0">
+          <div class="rounded-2 w-100 dashboard-bottom-box text-center">
+            <p class="text-center w-100 rounded-top-2 bg-primary py-2">پیگیری از دیگران</p>
+            <span>در حال حاضر هیچ تسکی ندارید!</span>
           </div>
         </div>
       </div>
