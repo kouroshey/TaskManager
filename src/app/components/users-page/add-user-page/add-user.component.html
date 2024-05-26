@@ -7,31 +7,31 @@
                 <div class="row">
                     <div class="col-4 mb-3">
                         <label for="name" class="form-label">نام</label>
-                        <input required formControlName="firstName" type="text" class="form-control" id="name" />
-                        <div *ngIf="addUserForm.controls.firstName.touched && addUserForm.controls.firstName.errors?.required"
+                        <input required formControlName="FirstName" type="text" class="form-control" id="name" />
+                        <div *ngIf="addUserForm.controls.FirstName.touched && addUserForm.controls.FirstName.errors?.required"
                             class="text text-danger mt-1">وارد کردن نام الزامی است!</div>
-                        <div *ngIf="addUserForm.controls.firstName.touched && addUserForm.controls.firstName.errors?.minlength"
+                        <div *ngIf="addUserForm.controls.FirstName.touched && addUserForm.controls.FirstName.errors?.minlength"
                             class="text text-danger mt-1">نام باید حداقل 4 کاراکتر باشد!
                         </div>
                     </div>
                     <div class="col-4 mb-3">
                         <label for="familyName" class="form-label">نام خانوادگی</label>
-                        <input required formControlName="lastName" type="text" class="form-control" id="familyName" />
-                        <div *ngIf="addUserForm.controls.lastName.touched && addUserForm.controls.lastName.errors?.required"
+                        <input required formControlName="LastName" type="text" class="form-control" id="familyName" />
+                        <div *ngIf="addUserForm.controls.LastName.touched && addUserForm.controls.LastName.errors?.required"
                             class="text text-danger mt-1">وارد کردن نام خانوادگی الزامی است!
                         </div>
-                        <div *ngIf="addUserForm.controls.lastName.touched && addUserForm.controls.lastName.errors?.minlength"
+                        <div *ngIf="addUserForm.controls.LastName.touched && addUserForm.controls.LastName.errors?.minlength"
                             class="text text-danger mt-1">
                             نام خانوادگی باید حداقل 4 کاراکتر باشد!
                         </div>
                     </div>
                     <div class="col-4 mb-3">
                         <label for="username" class="form-label">نام کاربری</label>
-                        <input type="text" formControlName="username" required class="form-control" id="username" />
-                        <div *ngIf="addUserForm.controls.username.touched && addUserForm.controls.username.errors?.required"
+                        <input type="text" formControlName="UserName" required class="form-control" id="username" />
+                        <div *ngIf="addUserForm.controls.UserName.touched && addUserForm.controls.UserName.errors?.required"
                             class="text text-danger mt-1">وارد کردن نام کاربری الزامی است!
                         </div>
-                        <div *ngIf="addUserForm.controls.username.touched && addUserForm.controls.username.errors?.pattern"
+                        <div *ngIf="addUserForm.controls.UserName.touched && addUserForm.controls.UserName.errors?.pattern"
                             class="text text-danger mt-1">
                             نام کاربری باید با کاراکترهای انگلیسی (a - z) نوشته شود <br>
                             نام کاربری باید بیشتر از 4 کاراکتر باشد
@@ -41,15 +41,15 @@
                 <div class="row">
                     <div class="mb-3 col-4">
                         <label for="paswword" class="form-label">پسورد</label>
-                        <input formControlName="password" required type="password" class="form-control" id="password">
-                        <div *ngIf="addUserForm.controls.password.touched && addUserForm.controls.password.errors?.required"
+                        <input formControlName="Password" required type="password" class="form-control" id="password">
+                        <div *ngIf="addUserForm.controls.Password.touched && addUserForm.controls.Password.errors?.required"
                             class="text text-danger mt-1">وارد کردن پسورد الزامی است!
                         </div>
-                        <div *ngIf="addUserForm.controls.password.touched && addUserForm.controls.password.errors?.pattern"
+                        <div *ngIf="addUserForm.controls.Password.touched && addUserForm.controls.Password.errors?.pattern"
                             class="text text-danger mt-1">
                             پسورد باید شامل اعداد ، کاراکتر های انگلیسی و حروف کوچک و بزرگ باشد <br />
                         </div>
-                        <div *ngIf="addUserForm.controls.password.touched && addUserForm.controls.password.errors?.minlength"
+                        <div *ngIf="addUserForm.controls.Password.touched && addUserForm.controls.Password.errors?.minlength"
                         class="text text-danger mt-1">
                         پسورد باید حداقل ۴ کاراکتر باشد 
                         </div>

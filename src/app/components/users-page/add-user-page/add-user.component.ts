@@ -23,12 +23,12 @@ export class AddUser implements OnInit {
         private router: Router
     ) {
         this.addUserForm = this.fb.group({
-            firstName: ["", [Validators.required, Validators.minLength(4)]],
-            lastName: ["", [Validators.required, Validators.minLength(4)]],
-            password: ["", [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])$/),Validators.minLength(5)]],
+            FirstName: ["", [Validators.required, Validators.minLength(4)]],
+            LastName: ["", [Validators.required, Validators.minLength(4)]],
+            Password: ["", [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])$/),Validators.minLength(5)]],
             confirmPassword: ["", [Validators.required]],
-            username: ["", [Validators.required, Validators.pattern(/^[a-z0-9]+.{4,}$/)]],
-            avatar:[null]
+            UserName: ["", [Validators.required, Validators.pattern(/^[a-z0-9]+.{4,}$/)]],
+            Avatar:[null]
         }, {
             validators: this.passwordMatchValidator
         });
@@ -37,7 +37,7 @@ export class AddUser implements OnInit {
     ngOnInit() { }
 
     passwordMatchValidator(group: FormGroup): { [key: string]: any } | null {
-        const password = group.get('password').value;
+        const password = group.get('Password').value;
         const confirmPassword = group.get('confirmPassword').value;
         console.log(password === confirmPassword);
 
@@ -55,7 +55,7 @@ export class AddUser implements OnInit {
             // this.showUpload = true
             // this.status = 'initial'
             // this.file = file
-            this.addUserForm.get('avatar').setValue(file)
+            this.addUserForm.get('Avatar').setValue(file)
         }
     }
 
@@ -95,8 +95,7 @@ export class AddUser implements OnInit {
                 formData.append(formControlName,  this.addUserForm.get(formControlName).value);    
             }); 
 
-            console.log('user',formData)
-            this.userService.addUser(formData)
+            console.log('user res',this.userService.addUser(formData))
             // this.router.navigate([`users/all`])
 
         }
