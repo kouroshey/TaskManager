@@ -17,20 +17,15 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
-
 @NgModule({
-
   declarations: [AddProjectPageComponent, EditProjectPageComponent, AllProjectPageComponent, ChatComponent, TasksComponent, ConversationComponent],
   imports: [CommonModule,
     ProjectPageRoutingModule,
     NgPersianDatepickerModule,
     ReactiveFormsModule,
     FormsModule,
-    NgbModule,NgbDropdownModule
-    NgbModule,
     NgbDropdownModule,
     SharedModule
-
   ]
 })
 export class ProjectPagesModule { }
