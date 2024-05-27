@@ -31,5 +31,10 @@ export class ProjectService {
     {
         return this.http.get(this.baseUrl+'/api/project/get/'+id)
     }
+
+    public updateProject(param:{})
+    {
+      return this.http.post(this.baseUrl+'/api/project/edit',param)
+    }
   
 }
