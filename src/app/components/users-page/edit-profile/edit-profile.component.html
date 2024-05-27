@@ -1,116 +1,102 @@
 <app-bread-crumbs></app-bread-crumbs>
-<div>
-    <div class="card add-user-page">
+<div class="row">
+    <div class="col-md-8">
+    <div class=" card add-user-page">
+        <div class="card-header">
+            <h5 class="mb-3">ویرایش پروفایل</h5>
+        </div>
         <div class="card-body container-lg">
-            <h4 class="mb-3">ویرایش پروفایل</h4>
+            
+            
             <form class="d-flex flex-column gap-3" [formGroup]="editProfileForm">
-                <div class="row">
-                    <div class="row">
-                        <div class="col-4 mb-3">
+                   
+                        <div class=" mb-3">
                             <label for="name" class="form-label">نام</label>
-                            <input required formControlName="name" type="text" class="form-control" id="name" />
-                            <div *ngIf="editProfileForm.controls.name.touched && editProfileForm.controls.name.errors?.required"
+                            <input required formControlName="firstName" type="text" class="form-control" id="name" />
+                            <div *ngIf="editProfileForm.controls.firstName.touched && editProfileForm.controls.firstName.errors?.required"
                                 class="text text-danger mt-1">وارد کردن نام الزامی است!</div>
-                            <div *ngIf="editProfileForm.controls.name.touched && editProfileForm.controls.name.errors?.minlength"
+                            <div *ngIf="editProfileForm.controls.firstName.touched && editProfileForm.controls.firstName.errors?.minlength"
                                 class="text text-danger mt-1">نام باید حداقل 4 کاراکتر باشد!
                             </div>
                         </div>
-                        <div class="col-4 mb-3">
+                        <div class=" mb-3">
                             <label for="familyName" class="form-label">نام خانوادگی</label>
-                            <input required formControlName="familyName" type="text" class="form-control"
+                            <input required formControlName="lastName" type="text" class="form-control"
                                 id="familyName" />
-                            <div *ngIf="editProfileForm.controls.familyName.touched && editProfileForm.controls.familyName.errors?.required"
+                            <div *ngIf="editProfileForm.controls.lastName.touched && editProfileForm.controls.lastName.errors?.required"
                                 class="text text-danger mt-1">وارد کردن نام خانوادگی الزامی است!
                             </div>
-                            <div *ngIf="editProfileForm.controls.familyName.touched && editProfileForm.controls.familyName.errors?.minlength"
+                            <div *ngIf="editProfileForm.controls.lastName.touched && editProfileForm.controls.lastName.errors?.minlength"
                                 class="text text-danger mt-1">
                                 نام خانوادگی باید حداقل 4 کاراکتر باشد!
                             </div>
                         </div>
-                        <div class="col-4 mb-3">
-                            <label for="username" class="form-label">نام کاربری</label>
-                            <input type="text" formControlName="username" required class="form-control" id="username" />
-                            <div *ngIf="editProfileForm.controls.username.touched && editProfileForm.controls.username.errors?.required"
-                                class="text text-danger mt-1">وارد کردن نام کاربری الزامی است!
-                            </div>
-                            <div *ngIf="editProfileForm.controls.username.touched && editProfileForm.controls.username.errors?.pattern"
-                                class="text text-danger mt-1">
-                                نام کاربری باید با کاراکترهای انگلیسی (a - z) نوشته شود <br>
-                                نام کاربری باید بیشتر از 4 کاراکتر باشد
-                            </div>
+                     
+                   
+                   
+                        <div class=" d-flex flex-column gap-2">
+                      
+                            <button type="button" (click)="editProfile()"  class="btn btn-success my-4 align-self-end submit-btn">ثبت</button>
                         </div>
+            </form>
+        </div>
+    </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card add-user-page">
+            <div class="card-header">
+                <h5 class="mb-3"> تغییر رمز عبور</h5>
+            </div>
+            <div class="card-body container-lg">
+               
+                <form [formGroup]="editPasswordForm">
+                 
+                    <div class="mb-3">
+                        <label for="oldPassword" class="form-label">رمز عبور کنونی</label>
+                        <input formControlName="oldPassword" required type="password" class="form-control"
+                            id="oldPassword">
+                        <div *ngIf="editPasswordForm.controls.oldPassword.touched && editPasswordForm.controls.oldPassword.errors?.required"
+                            class="text text-danger mt-1">وارد کردن پسورد الزامی است!
+                        </div>
+                        
                     </div>
-                    <div class="row">
-                        <div class="mb-3 col-4">
-                            <label for="paswword" class="form-label">پسورد جدید</label>
+                        <div class="mb-3">
+                            <label for="paswword" class="form-label">رمز عبور جدید</label>
                             <input formControlName="password" required type="password" class="form-control"
                                 id="password">
-                            <div *ngIf="editProfileForm.controls.password.touched && editProfileForm.controls.password.errors?.required"
+                                <div *ngIf="editPasswordForm.controls.password.touched && editPasswordForm.controls.password.errors?.required"
                                 class="text text-danger mt-1">وارد کردن پسورد الزامی است!
                             </div>
-                            <div *ngIf="editProfileForm.controls.password.touched && editProfileForm.controls.password.errors?.pattern"
+                            <div *ngIf="editPasswordForm.controls.password.touched && editPasswordForm.controls.password.errors?.pattern"
                                 class="text text-danger mt-1">
-                                پسورد باید فقط شامل کاراکتر های انگلیسی باشد <br />
-                                پسورد باید شامل اعداد باشد <br />
-                                پسورد باید شامل حروف بزرگ و کوچک باشد <br />
-                                پسورد باید حداقل ۴ کاراکتر باشد <br />
+                                پسورد باید شامل اعداد ، کاراکتر های انگلیسی و حروف کوچک و بزرگ باشد <br />
+                            </div>
+                            <div *ngIf="editPasswordForm.controls.password.touched && editPasswordForm.controls.password.errors?.minlength"
+                            class="text text-danger mt-1">
+                            پسورد باید حداقل ۸ کاراکتر باشد 
                             </div>
                         </div>
-                        <div class="mb-3 col-4">
-                            <label for="exampleInputEmail1" class="form-label">تایید پسورد</label>
-                            <input (change)="passwordMatchValidator(editProfileForm)" type="password"
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">تایید رمز عبور جدید</label>
+                            <input (change)="passwordMatchValidator(editPasswordForm)" type="password"
                                 class="form-control" formControlName="confirmPassword" id="confirmPassword" />
-                            <div *ngIf="editProfileForm.controls.confirmPassword.touched && editProfileForm.controls.confirmPassword.errors?.required"
+                            <div *ngIf="editPasswordForm.controls.confirmPassword.touched && editPasswordForm.controls.confirmPassword.errors?.required"
                                 class="text text-danger mt-1">
                                 وارد کردن تایید پسورد الزامی است!
                             </div>
-                            <div *ngIf="editProfileForm.controls.confirmPassword.touched && editProfileForm.controls.confirmPassword.errors?.passwordMismatch"
+                            <div *ngIf="editPasswordForm.controls.confirmPassword.touched && editPasswordForm.controls.confirmPassword.errors?.passwordMismatch"
                                 class="text text-danger mt-1">
                                 پسورد و تایید پسورد باید یکسان باشند
                             </div>
 
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4 d-flex flex-column gap-4">
-                            <div class="user-photo-container">
-                                <img class="rounded-5 user-photo" src="assets/images/default-avatar.png"
-                                    alt="تصویر پیشفرض">
-                            </div>
-                            <div class="choose-photo-parent">
-                                <label class="form-label" for="customFile">آپلود پروفایل جدید</label>
-                                <div *ngIf="status !== 'initial'" class="progress my-2">
-                                    <div *ngIf="status === 'uploading'"
-                                        class="progress-bar progress-bar-striped progress-bar-animated"
-                                        role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
-                                        style="width: 100%">
-                                    </div>
-                                    <div *ngIf="status === 'fail' || status === 'success'"
-                                        [ngClass]="{'bg-success': status === 'success', 'bg-danger': status === 'fail'}"
-                                        class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100">
-                                    </div>
-                                </div>
-                                <span *ngIf="status === 'fail'" class="text text-danger my-2">آپلود عکس موفقیت آمیز
-                                    نبود.
-                                    لطفا دوباره امتحان
-                                    کنید</span>
-                                <div class="choose-photo-input">
-                                    <input (change)="onFileChange($event)" type="file" class="form-control"
-                                        id="customFile">
-                                    <span class="">انتخاب تصویر</span>
-                                </div>
-                                <button *ngIf="file" (click)="onUpload()"
-                                    class="btn btn-primary w-100 mt-2">آپلود</button>
-                            </div>
+                   
+                        <div class=" d-flex flex-column gap-2">
+                      
+                            <button type="button" (click)=" changePassword()"  class="btn btn-success my-4 align-self-end submit-btn">ثبت</button>
                         </div>
-                        <div class="col-8 d-flex flex-column gap-2">
-                            <label for="desc">توضیحات</label>
-                            <textarea class="w-100 form-control" rows="4" name="desc"></textarea>
-                            <button type="submit" class="btn btn-success my-4 align-self-end submit-btn">ثبت</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>

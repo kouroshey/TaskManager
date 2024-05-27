@@ -2,7 +2,7 @@
 <div class="card add-user-page">
     <div class="card-body container-lg">
         <h4 class="mb-3">افزودن کاربر جدید</h4>
-        <form class="d-flex flex-column gap-3" [formGroup]="addUserForm" (ngSubmit)="addUser()" enctype="multipart/form-data">
+        <form class="d-flex flex-column gap-3" [formGroup]="addUserForm"  enctype="multipart/form-data">
             <div class="row">
                 <div class="row">
                     <div class="col-4 mb-3">
@@ -51,7 +51,7 @@
                         </div>
                         <div *ngIf="addUserForm.controls.Password.touched && addUserForm.controls.Password.errors?.minlength"
                         class="text text-danger mt-1">
-                        پسورد باید حداقل ۴ کاراکتر باشد 
+                        پسورد باید حداقل ۸ کاراکتر باشد 
                         </div>
                     </div>
                     <div class="mb-3 col-4">
@@ -99,7 +99,7 @@
                     <div class="col-8 d-flex flex-column gap-2">
                         <label for="desc">توضیحات</label>
                         <textarea class="w-100 form-control" rows="4" name="desc"></textarea>
-                        <button type="submit" class="btn btn-success my-4 align-self-end submit-btn">ثبت</button>
+                        <button type="button" (click)="addUser()" class="btn btn-success my-4 align-self-end submit-btn">ثبت</button>
                     </div>
                 </div>
             </div>

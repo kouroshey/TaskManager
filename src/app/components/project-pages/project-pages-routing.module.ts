@@ -23,7 +23,7 @@ const routes: Routes = [
         component: AddProjectPageComponent
       },
       {
-        path: 'edit',
+        path: 'edit/:id',
         component: EditProjectPageComponent
       },
       {

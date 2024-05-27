@@ -10,7 +10,7 @@
 
       </div>
 
-      <div *ngIf="ProjectList.length===0" class="error-wrapper" style="min-height: fit-content">
+      <div *ngIf="!ProjectList" class="error-wrapper" style="min-height: fit-content">
         <div class="container"><img class="img-100" src="assets/images/other-images/sad.png" alt="">
          
           <div class="col-md-8 offset-md-2">
@@ -22,8 +22,9 @@
         <div *ngFor="let proj of ProjectList" class="col-12 col-md-6 col-lg-3">
           <div class="card project-card" >
             <div class="card-header px-4 pt-4">
-              <h5 class="card-title mb-0" (click)="Detail(proj.id)">{{proj.title}}</h5>
-              <div class="badge bg-success my-2">{{ proj.status }}</div>
+              <h5 class="card-title mb-0" (click)="Detail(proj.Id)">{{proj.Name}}</h5>
+              <div class="badge bg-success my-2" *ngIf="proj.IsActive">فعال</div>
+              <div class="badge bg-error my-2" *ngIf="!proj.IsActive">غیر فعال</div>
               <div class="card-actions float-end">
                 <div ngbDropdown>
                             <a ngbDropdownToggle href="javascript:;" class="float-left" data-toggle="dropdown"
@@ -37,7 +38,7 @@
                               </svg>
                             </a>
                             <div ngbDropdownMenu class="text-md-right">
-                                <a ngbDropdownItem class="dropdown-item " href="#" routerLink="/projects/edit">ویرایش</a>
+                                <a ngbDropdownItem class="dropdown-item " href="#" [routerLink]="['/projects/edit/',proj.Id]">ویرایش</a>
                                 <a ngbDropdownItem class="dropdown-item" href="#">حذف</a>
                             </div>
                         </div>
@@ -46,7 +47,7 @@
            
    
             <div class="card-body px-4 pt-2">
-              <p>{{proj.description}}</p>
+              <p>{{proj.Description}}</p>
               <div class="customers d-inline-block avatar-group">
                 <ul>
                   <li class="d-inline-block"><img class="img-50 rounded-circle" src="assets/images/user/3.jpg" alt="" />
@@ -58,55 +59,27 @@
                 </ul>
               </div>
             </div>
-          </div>
-          <h5 class="card-title mb-0">{{proj.title}}</h5>
-          <div class="badge bg-success my-2">{{ proj.status }}</div>
-
-          <div class="card-body px-4 pt-2">
-            <p>{{proj.description}}</p>
-            <div class="customers d-inline-block avatar-group">
-              <ul>
-                <li class="d-inline-block"><img class="img-50 rounded-circle" src="assets/images/user/3.jpg" alt="" />
-                </li>
-                <li class="d-inline-block"><img class="img-50 rounded-circle" src="assets/images/user/5.jpg" alt="" />
-                </li>
-                <li class="d-inline-block"><img class="img-50 rounded-circle" src="assets/images/user/1.jpg" alt="" />
-                </li>
-              </ul>
-            </div>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item px-4 pb-4">
-              <p class="mb-2 text-black font-weight-bold">میزان پیشرفت <span class="float-left">100%</span></p>
-              <div class="progress progress-sm">
-                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="50"
-                  style="width: 100%;">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item px-4 pb-4">
+                <p class="mb-2 text-black font-weight-bold">میزان پیشرفت <span class="float-left">100%</span></p>
+                <div class="progress progress-sm">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="50"
+                    style="width: 100%;">
+                  </div>
                 </div>
-              </div>
-            </li>
-          </ul>
+              </li>
+            </ul>
+          </div>
+       
+
+        
+          
         </div>
       </div>
 
 
 
-      <nav aria-label="Page navigation example" class="w-100 d-flex justify-content-end my-4">
-        <ul class="pagination">
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+     
 
     </div>
   </div>

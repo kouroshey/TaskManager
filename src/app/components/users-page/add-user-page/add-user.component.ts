@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { UsersService } from 'src/app/shared/services/users.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -18,14 +19,14 @@ export class AddUser implements OnInit {
     file: File | null = null
     constructor(
         private fb: FormBuilder,
-        private api: ApiService,
+        private toastr:ToastrService,
         private userService:UsersService,
         private router: Router
     ) {
         this.addUserForm = this.fb.group({
             FirstName: ["", [Validators.required, Validators.minLength(4)]],
             LastName: ["", [Validators.required, Validators.minLength(4)]],
-            Password: ["", [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])$/),Validators.minLength(5)]],
+            Password: ["", [Validators.required, Validators.pattern(/^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/),Validators.minLength(8)]],
             confirmPassword: ["", [Validators.required]],
             UserName: ["", [Validators.required, Validators.pattern(/^[a-z0-9]+.{4,}$/)]],
             Avatar:[null]
@@ -64,47 +65,49 @@ export class AddUser implements OnInit {
    
       
 
-    onUpload() {
-        if (this.file) {
-            const formData = new FormData();
-
-            formData.append('file', this.file, this.file.name);
-
-            const upload$ = this.api.post("https://httpbin.org/post", formData);
-
-            this.status = 'uploading';
-
-            upload$.subscribe({
-                next: () => {
-                    this.status = 'success';
-                },
-                error: (error: any) => {
-                    this.status = 'fail';
-                    return new Error(error);
-                },
-            });
-        }
-    }
+   
 
 
     addUser(){
-        try{
+   
+        if(this.addUserForm.invalid)
+            {
+    
+                this.addUserForm.markAllAsTouched()
+              this.toastr.error('خواهشمند است موارد خواسته شده را به طور صحیح و کامل تکمیل نماید')
+                    return null
+    
+            }
+        else{
 
-            const formData = new FormData();       
-            Object.keys(this.addUserForm.controls).forEach(formControlName => {  
-                formData.append(formControlName,  this.addUserForm.get(formControlName).value);    
-            }); 
+           const userForm={
+            userName:this.addUserForm.get('UserName').value,
+            firstName:this.addUserForm.get('FirstName').value,
+            lastName:this.addUserForm.get('LastName').value,
+            password:this.addUserForm.get('Password').value,
+            avatar:""
 
-            console.log('user res',this.userService.addUser(formData))
+           }
+
+        
+           this.userService.addUser(userForm).subscribe((response: any) => {
+            if (response?.success) {
+             
+              this.router.navigate(['/users/all'])
+              this.toastr.success(response.message);
+             
+            } else {
+              console.log(response.message);
+              
+            }
+          });
+          
             // this.router.navigate([`users/all`])
 
-        }
-        catch(e)
-        {
-
-            console.log('error in submit user',e)
-
-        }
+      
+          
+}
+       
     }
 
 }

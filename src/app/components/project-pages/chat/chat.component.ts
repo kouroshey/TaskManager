@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NgbNavChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -24,6 +25,8 @@ export class ChatComponent {
     }
   }
 
-  constructor() { }
+  constructor() {
+
+   }
 
 }

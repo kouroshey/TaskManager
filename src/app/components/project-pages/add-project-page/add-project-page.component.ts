@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ApiService} from '../../../shared/services/api.service'
+import { Router } from '@angular/router';
 import {Jalali} from 'jalali-ts'
+import { ToastrService } from 'ngx-toastr';
+import { ProjectService } from 'src/app/shared/services/project.service';
 
 
 
@@ -18,13 +20,17 @@ export class AddProjectPageComponent implements OnInit {
 
   constructor(
     private fb:FormBuilder,
-    private api:ApiService
+    private projectService:ProjectService,
+    private toastr:ToastrService,
+    private router:Router
+    
   ){
 
     this.addProjectForm= this.fb.group({
       title:["",[Validators.required,Validators.minLength(4)]],
-      startDate:["",[Validators.required]],
-      endDate:["",Validators.required]
+      startTime:["",[Validators.required]],
+      endTime:["",Validators.required],
+      description:['']
 
     },{
       validators:this.DateValidator
@@ -35,8 +41,8 @@ export class AddProjectPageComponent implements OnInit {
 
   DateValidator(form:FormGroup):{ [key: string]: any } | null{
 
-    const start=form.get('startDate').value;
-    const end=form.get('endDate').value;
+    const start=form.get('startTime').value;
+    const end=form.get('endTime').value;
     
     const nowD=Jalali.now()
     nowD.format('YYYY/MM/DD HH:mm:ss')
@@ -46,24 +52,68 @@ export class AddProjectPageComponent implements OnInit {
 
     if(nowD.valueOf() > startD.valueOf())
       {
-        form.get('startDate').setErrors({startValid:true})
+        form.get('startTime').setErrors({startValid:true})
         
         return {startValid:true}
       }
     if(startD.valueOf() > endD.valueOf())
       {
-        form.get('endDate').setErrors({endValid:true})
+        form.get('endTime').setErrors({endValid:true})
         return {endValid:true}
       } 
 
 
-      form.get('startDate').setErrors(null)
-      form.get('endDate').setErrors(null)
+      form.get('startTime').setErrors(null)
+      form.get('endTime').setErrors(null)
 
     return null;
 
   }
 
+
+
+  addProject(){
+
+      if(this.addProjectForm.invalid)
+        {
+          this.addProjectForm.markAllAsTouched()
+
+          this.toastr.error('خواهشمند است موارد خواسته شده را به طور صحیح و کامل تکمیل نماید')
+                return null
+
+        }
+
+      else
+        {
+
+            const start=Jalali.parse(this.addProjectForm.get('startTime').value)
+            const end=Jalali.parse(this.addProjectForm.get('endTime').value)
+
+          
+              const form={
+                name:this.addProjectForm.get('title').value,
+                description:this.addProjectForm.get('description').value,
+                startTime:start.gregorian(),
+                endTime:end.gregorian()
+
+              }
+
+            
+            this.projectService.AddProject(form).subscribe((response: any) => {
+              if (response?.success) {
+               
+                this.router.navigate(['/projects/all'])
+                this.toastr.success(response.message);
+               
+              } else {
+                console.log(response.message);
+                
+              }
+            });
+        }
+   
+    
+  }
 
 
 

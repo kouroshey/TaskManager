@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ApiService} from "../../../shared/services/api.service";
 import {Jalali} from "jalali-ts";
+import { ProjectService } from 'src/app/shared/services/project.service';
+import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { title } from 'process';
 
 @Component({
   selector: 'app-edit-project-page',
@@ -10,23 +14,24 @@ import {Jalali} from "jalali-ts";
 })
 export class EditProjectPageComponent implements OnInit {
 
-  
+  id:number;
   editProjectForm:FormGroup;
+  project:any
   
   public statusList=["active","complete","canceled"]
 
   constructor(
       private fb:FormBuilder,
-      private api:ApiService
+      private projectService:ProjectService,
+      private activatedRoute:ActivatedRoute,
+      private toastr:ToastrService
   ){
 
     this.editProjectForm= this.fb.group({
-      id:[1,Validators.required],
-      title:["عنوان پروژه",[Validators.required,Validators.minLength(4)]],
-      description:['لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد کتابهای زیادی در شصت و سه درصد گذشته حال و آینده'],
-      startDate:["1399/8/13",[Validators.required]],
-      endDate:["1402/8/28",Validators.required],
-      status:["complete",Validators.required]
+      title:['',[Validators.required,Validators.minLength(4)]],
+      description:[''],
+      startDate:['',[Validators.required]],
+      endDate:['',[Validators.required]],
 
     },{
       Validators:this.DateValidator
@@ -34,6 +39,26 @@ export class EditProjectPageComponent implements OnInit {
   }
   
   ngOnInit(): void {
+
+  this.activatedRoute.params.subscribe(res=>{
+    this.id=res.id
+
+    this.projectService.getProject(this.id).subscribe(res=>{
+
+      const start=new Date(res.startTime)
+
+      const end=new Date(res.endTime)
+      this.editProjectForm.patchValue({
+        title:res.name,
+        description:res.description,
+        startDate:start.toLocaleDateString('fa-Ir'),
+        endDate:end.toLocaleDateString('fa-Ir')
+      })
+    })
+  })
+
+
+
       
   }
 
@@ -66,6 +91,22 @@ export class EditProjectPageComponent implements OnInit {
     form.get('endDate').setErrors(null)
 
     return null;
+
+  }
+
+
+  editProject(){
+
+    if(this.editProjectForm.invalid)
+      {
+
+
+      }
+
+      else{
+
+      }
+    
 
   }
 

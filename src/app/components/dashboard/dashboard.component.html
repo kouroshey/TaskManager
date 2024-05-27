@@ -4,7 +4,7 @@
     <div class="card-body">
       <img class="rounded-5 user-photo" src="assets/images/default-avatar.png" alt="تصویر پیشفرض">
       <div class="user-details d-flex flex-column align-items-center mt-2">
-        <span>کوروش عیدی وندی</span>
+        <span>{{user.firstName+' '+user.lastName}}</span>
         <span>دوشنبه 31 اردیبهشت</span>
         <button class="btn btn-primary" routerLink="/users/profile"> ویرایش پروفایل</button>
       </div>
@@ -13,7 +13,7 @@
   <div class="h-100 card flex-grow-1">
     <div class="card-body">
       <div class="row">
-        <div class="title row">میز کار کوروش عیدی وندی</div>
+        <div class="title row">میز کار {{user.firstName+' '+user.lastName}}</div>
         <div class="row desktop-top gap-4 mt-4 ">
           <div class="taks-card card col-md-4 col-xl-3 col-xxl-2 p-0">
             <div class="card-body">

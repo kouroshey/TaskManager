@@ -1,10 +1,10 @@
 <!-- breadcrumb.component.html -->
 <div class="card-body">
   <nav>
-    <ol class="breadcrumb breadcrumb-colored m-b-20 bg-primary">
+    <ol class="breadcrumb  m-b-20  ">
       <li class="breadcrumb-item">داشبورد</li>
       @for (breadcrumb of breadcrumbs; track $index) {
-      <li class="breadcrumb-item">
+      <li class="breadcrumb-item ">
         <a [routerLink]="pathname" routerLinkActive="router-link-active">
           {{breadcrumb}}
         </a>

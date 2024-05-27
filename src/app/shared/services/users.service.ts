@@ -17,28 +17,39 @@ export class UsersService {
 
   
   public getAllUsers(params: {}):Observable<UserPagination>{
-    return this.http.post<UserPagination>(this.baseUrl+"/api/user/get-all",params,{headers: {
-        'Authorization': `Bearer ${localStorage.getItem('Token')}`
-      }})
+    return this.http.post<UserPagination>(this.baseUrl+"/api/user/get-all",params)
   }
 
   public getUser(id:number):Observable<IUser>{
-    return this.http.get<IUser>(this.baseUrl+"/api/user/get/"+id,{headers: {
-      'Authorization': `Bearer ${localStorage.getItem('Token')}`
-    }})
+    return this.http.get<IUser>(this.baseUrl+"/api/user/get/"+id)
   }
 
-  public addUser(user:FormData):Observable<any>{
+  public addUser(user:{}){
    try{
-    return this.http.post<any>(this.baseUrl+'/api/user/create',user,{headers: {
-      'Authorization': `Bearer ${localStorage.getItem('Token')}`,
-      'Content-Type': 'multipart/form-data'
-    }})
+    return this.http.post(this.baseUrl+'/api/user/create',user)
    }
    catch (e){
     console.log('error adduser',e)
    }
   }
+
+  public getMaster():Observable<IUser>{
+
+    return this.http.get<IUser>(this.baseUrl+'/api/authentication/get-master')
+
+  }
+
+
+  public UpdateUserInfo(param:{}):Observable<any>
+  {
+    return this.http.post(this.baseUrl+'/api/user/edit',param)
+  }
+
+  public UpdateUserPassword(param:{}):Observable<any>
+  {
+    return this.http.post(this.baseUrl+'/api/user/change-password',param)
+  }
+
   
 
   

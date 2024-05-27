@@ -36,10 +36,8 @@ export class AllUsers implements OnInit {
 
             if(pageData.type==="users")
                this.showUsers(pageData.currentPage,pageData.itemsPerPage);
-                // this.showFakeUSers()
             else
                 this.showUsers(1,10) 
-                // this.showFakeUSers()
         }
         catch (e)
         {
@@ -52,20 +50,14 @@ export class AllUsers implements OnInit {
     }
     
     
-    showFakeUSers()
-    {
-        this.userData={users:[{userName:'samal1',firstName:'علی',lastName:'علوی',email:'salam@ir',avatar:''}
-                ,{userName:'samal2',firstName:'علی',lastName:'علوی',email:'salam@ir',avatar:''}
-                ,{userName:'samal3',firstName:'علی',lastName:'علوی',email:'salam@ir',avatar:''}]
-            ,paginationHeader:{currentPage:2,totalPages:5,totalCount:120,itemsPerPage:10}}
-    }
    public showUsers(currentPage:number,itemsPerPage:number)
     {
       try {
           this.currentPage=currentPage;
           this.itemsPerPage=itemsPerPage;
-          localStorage.setItem("pagination",JSON.stringify({type:"users",currentPage:currentPage,itemsPerPage:itemsPerPage,search:''}))
           this.userService.getAllUsers({itemsPerPage:this.itemsPerPage,currentPage:this.currentPage}).subscribe(res=>{this.userData=res})
+          localStorage.setItem("pagination",JSON.stringify({type:"users",currentPage:currentPage,itemsPerPage:itemsPerPage,search:''}))
+
 
       } 
       catch (E)
@@ -74,14 +66,19 @@ export class AllUsers implements OnInit {
       }
     }
 
-    public ShowUser(id:number,content)
+    public ShowUser(user,content)
     {
-        this.userService.getUser(id).subscribe(res=>this.user=res)
-        this.open(content)
+        
+            this.user=null
+            this.user=user;
+            this.open(content)
+        
+        
     }
 
 
     public deleteUser(user,content){
+        this.user=null
         this.user=user;
         this.open(content)
     }

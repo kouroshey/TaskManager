@@ -26,6 +26,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { ToastrModule } from 'ngx-toastr';
 import { ProjectPagesModule } from "./components/project-pages/project-pages.module";
 import { ResponseInterceptor } from './shared/interceptors/response.interceptor';
+import { AuthInterceptor } from './shared/resolvers/AuthInterceptor.resolver';
 
 @NgModule({
   declarations: [
@@ -38,8 +39,8 @@ import { ResponseInterceptor } from './shared/interceptors/response.interceptor'
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      timeOut: 2000,
-      positionClass: 'toast-top-left',
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
     OverlayModule,
@@ -61,6 +62,7 @@ import { ResponseInterceptor } from './shared/interceptors/response.interceptor'
   bootstrap: [AppComponent],
   providers: [
     LoginGuard, SharedModule,
+    {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}
     // { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor, multi: true },
   ]
 })

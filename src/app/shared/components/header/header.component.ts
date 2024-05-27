@@ -5,6 +5,8 @@ import { LayoutService } from "../../services/layout.service";
 import SwiperCore, { Navigation, Pagination, Autoplay } from "swiper";
 import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
+import { IUser } from "../../model/user.model";
+import { UsersService } from "../../services/users.service";
 
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 @Component({
@@ -13,6 +15,8 @@ SwiperCore.use([Navigation, Pagination, Autoplay]);
   styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
+
+  public user:IUser;
   public elem: any;
   @Input() userInfo: any
 
@@ -25,7 +29,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.elem = document.documentElement;
-    console.log(this.location.path());
   }
 
   sidebarToggle() {
