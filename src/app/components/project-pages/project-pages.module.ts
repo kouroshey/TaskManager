@@ -26,6 +26,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     NgbDropdownModule,
     SharedModule
+    
   ]
 })
 export class ProjectPagesModule { }
